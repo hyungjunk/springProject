@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="engboardMapper">
+
+	<insert id="create">
+		INSERT INTO engBoard (word, dialogue, practice) VALUES(#{word}, #{dialogue}, #{practice})
+	</insert>
+	
+	<select id="read" resultType="com.jun.domain.EngBoardVO">
+		SELECT bid, word, dialogue, practice FROM engboard WHERE bid>0 order by bid desc, regdate desc
+		LIMIT 0, 10
+	</select>
+	
+	<select id="countPage" resultType="int">
+		SELECT count(*) from engboard
+	</select>
+	
+	<select id="readlist" resultType="com.jun.domain.EngBoardVO">
+		SELECT bid, word, dialogue, practice FROM engboard WHERE bid>0 order by bid desc, regdate desc LIMIT #{pageStart}, #{perPageNum}
+	</select>
+
+	<update id="modify">
+		update engboard set word=#{word}, dialogue=#{dialogue}, practice=#{practice} where bid=#{bid}
+	</update>
+
+</mapper>
