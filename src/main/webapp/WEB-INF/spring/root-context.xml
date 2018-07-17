@@ -30,4 +30,5 @@
 	</bean>
 	
 	<context:component-scan base-package="com.jun.persistence" use-default-filters="true"/>
+	<context:component-scan base-package="com.jun.service" use-default-filters="true"/>
 </beans>

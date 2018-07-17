@@ -9,9 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.jun.domain.Criteria;
 import com.jun.domain.EngBoardVO;
+import com.jun.domain.SearchCriteria;
 
 @Repository
-public class EngBoardImpl implements EngBoardDAO {
+public class EngBoardDAOImpl implements EngBoardDAO {
 
 	@Inject
 	private SqlSession session;
@@ -24,16 +25,6 @@ public class EngBoardImpl implements EngBoardDAO {
 	}
 
 	@Override
-	public List<EngBoardVO> read() throws Exception {
-		return session.selectList(namespace+".read");
-	}
-
-	@Override
-	public int countPage() throws Exception {
-		return session.selectOne(namespace+".countPage");
-	}
-
-	@Override
 	public List<EngBoardVO> readlist(Criteria cri) throws Exception {
 		return session.selectList(namespace+".readlist", cri);
 	}
@@ -43,4 +34,19 @@ public class EngBoardImpl implements EngBoardDAO {
 		session.update(namespace+".modify", engboardVO);
 	}
 
+	@Override
+	public int countPage() throws Exception {
+		return session.selectOne(namespace+".countPage");
+	}
+
+	@Override
+	public List<EngBoardVO> searchList(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".searchList");
+	}
+
+	@Override
+	public int countSearchPage(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace+".countSearchPage");
+	}
+	
 }

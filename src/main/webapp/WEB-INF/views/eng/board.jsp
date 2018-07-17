@@ -6,12 +6,19 @@
 <title>Home</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</script>
 <script>
 var msg = "${msg}";
 if (msg=="SUCCESS") {
 	alert("완료되었습니다.");
 }
 </script>
+<style>
+td {
+	white-space:pre
+} 
+</style>
 </head>
 <body>
 <div class="container">
@@ -19,30 +26,35 @@ if (msg=="SUCCESS") {
 <h2>English lines are under here</h2>
 <h5>Click each row to modify</h5>
 <br>
-<table id="btable" class="bg-light table table-hover">
-	<th class= "text-center">No</th>
-	<th class= "text-center">Word</th>
-	<th class= "text-center">Dialogue</th>
-	<th class= "text-center">Practice</th>
+<table id="btable" class="bg-light table table-hover" >
+	<th class= "text-center" width="10%">No</th>
+	<th class= "text-center" width="10%">Word</th>
+	<th class= "text-center" width="40%">Dialogue</th>
+	<th class= "text-center" width="40%">Practice</th>
 	<c:forEach items="${list}" var="engboardVO">
 	<tr>
-		<td class="bid" data-name="bid">${engboardVO.bid}</td>
-		<td class="word" data-name="word" data-editable>${engboardVO.word}</td>
-		<td class="dialogue" data-name="dialogue" data-editable>${engboardVO.dialogue}</td>
-		<td class="practice" data-name="practice" data-editable>${engboardVO.practice}</td>
+		<td class="bid text-center" data-name="bid" style="width:10%">${engboardVO.bid}</td>
+		<td class="word text-center" data-name="word" data-editable style="width:10%">${engboardVO.word}</td>
+		<td class="dialogue" data-name="dialogue" data-editable style="width:40%">${engboardVO.dialogue}</td>
+		<td class="practice" data-name="practice" data-editable style="width:40%">${engboardVO.practice}</td>
 	</tr>
 	</c:forEach>
 </table>
 
 <div>
-	<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>
+<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>
+<form role="search" action="search" method="get">
+	<input id="keywordInput" type="search">
+	<button type="button" id="searchBtn" class="btn btn-default">Search</button>
+</form>
+<br>
 	<nav>
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item ${pageMaker.startPage==1?'disabled':'' }"/>
 	      <a class="page-link" href="/eng/board?page=${pageMaker.startPage-1}&perPageNum=${pageMaker.cri.getPerPageNum()}" tabindex="-1">Previous</a>
 	    </li>
 	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="page">
-			<li class="page-item">
+			<li class="page-item ${pageMaker.cri.getPage()==page?'active':'' }">
 			<a class="page-link" href="/eng/board?page=${page}&perPageNum=${pageMaker.cri.getPerPageNum()}"> ${page}</a>
 			</li>
 		</c:forEach>
@@ -81,62 +93,65 @@ $(".btn-info").click(function() {
         'slow');
 });
 
-function validCheck(){
-	var word = $('#word').val();
-	var dialogue=$('#dialouge').val();
-	var practice = $('#practice').val();
-	if (word.length&&dialogue.length&&practice.length < 2){
-		alert("모든 내용은 2글자 이상 입력해주세요");
-		return;
-	}
-}
 var formObj = $("#addForm");
 $("#sendForm").on("click", function(){
-	validCheck();
 	formObj.submit();
 });
 
 $("table").on("click", "[data-editable]", function(){
-	var $el = $(this);
-	var $input = $('<textarea rows=5 style="width:500px"/>').val( $el.text() );
-	var str = $el.text();
-	$el.html($input); //$(this).html($input)[0]
-	$input.focus();
-	var field_name = $el.attr('data-name');
+	var $clicked = $(this);
+	if ($clicked.find("textarea").length)
+	      return;
+	var $oldstr = $clicked.text();
+	var width = $clicked.attr('data-name') == "word"?"width:100px" : "width:450px";
+	var $newinput = $("<textarea rows=3 style='"+width+"'/>").val( $clicked.text() );
+	$clicked.html($newinput);
+	$newinput.focus();
+	var field_name = $clicked.attr('data-name');
 	var save = function(bid, newWord, newDialogue, newPractice){
-		var $td = $input.val();
+		var $td = $newinput.val();
 		$.ajax({
 			type : "POST",
-			url : "/tight",
+			url : "/modify/"+bid,
+			headers : {"Content-Type" : "application/json"},
 			data : JSON.stringify({
 				bid : bid,
 				word : newWord,
 				dialogue : newDialogue,
 				practice : newPractice
 			}),
-			dataType: "json",
+			dataType: "text",
 			success : function(msg){
-				if (msg["status"] == 'success'){
-					$input.replaceWith($td);
+				if (msg == "SUCCESS"){
+					$newinput.replaceWith($td);
 				} else {
-					alert("Fail");
-					$input.replaceWith($el);
+					alert("FAIL");
+					$newinput.replaceWith($oldstr);
 				}
 			},
-			error : function(msg) {
-				alert("ajax fail to get data from server");
+			error : function(msg){
+				alert("에러가 발생했습니다.");
+				$newinput.replaceWith($oldstr);
 			}
 		});
 	};
-	$($input).blur(function(){
-		var bid = $(this).closest('tr').find('td.bid').text();
-		var newWord = $(this).closest('tr').find('td.word').text();
-		var newDialogue = $(this).closest('tr').find('td.dialogue').text();
-		var newPractice = $(this).closest('tr').find('td.practice').text();
-		console.log(newPractice);
-		console.log(newPractice);
-		save(bid, newWord, newDialogue, newPractice)
-	})
+	$($newinput).blur(function(){
+        var row = $(this).closest("tr");
+        var bid = row.find("td.bid").text();
+        var newWord = $clicked.attr("data-name") == "word" ? row.find("td.word textarea").val() : row.find("td.word").text();
+        var newDialogue = field_name == "dialogue" ? row.find("td.dialogue textarea").val() : row.find("td.dialogue").text();
+        var newPractice = field_name == "practice" ? row.find("td.practice textarea").val() : row.find("td.practice").text();
+        save(bid, newWord, newDialogue, newPractice)
+    }); 
 });
+
+$("#searchBtn").on("click", function(){
+	console.log($(this));
+	self.location="search"
+		+'${pageMaker.pageBuilder(1)}'
+		+"&searchType=t"+"&keyword=" + $('#keywordInput').val();
+	console.log(self.location);
+});
+
 </script>
 </html>
