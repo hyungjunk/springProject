@@ -1,7 +1,5 @@
 package com.jun.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
@@ -22,7 +20,6 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/modify")
 public class RestControll {
 
-	
 	@Inject
 	private EngBoardService service;
 	

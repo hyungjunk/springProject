@@ -41,12 +41,12 @@ public class EngBoardDAOImpl implements EngBoardDAO {
 
 	@Override
 	public List<EngBoardVO> searchList(SearchCriteria cri) throws Exception {
-		return session.selectList(namespace+".searchList");
+		return session.selectList(namespace+".searchList", cri);
 	}
 
 	@Override
 	public int countSearchPage(SearchCriteria cri) throws Exception {
-		return session.selectOne(namespace+".countSearchPage");
+		return session.selectOne(namespace+".countSearchPage", cri);
 	}
 	
 }

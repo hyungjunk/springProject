@@ -8,13 +8,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </script>
-<script>
-var msg = "${msg}";
-if (msg=="SUCCESS") {
-	alert("완료되었습니다.");
-}
-</script>
 <style>
+table { table-layout: fixed; }
+table th, table td { overflow: hidden; }
 td {
 	white-space:pre
 } 
@@ -24,59 +20,61 @@ td {
 <div class="container">
 <br>
 <h2>English lines are under here</h2>
-<h5>Click each row to modify</h5>
+<h5>Just click each cell if you want to modify</h5>
 <br>
-<table id="btable" class="bg-light table table-hover" >
-	<th class= "text-center" width="10%">No</th>
-	<th class= "text-center" width="10%">Word</th>
-	<th class= "text-center" width="40%">Dialogue</th>
+<table id="btable" class="bg-light table table-hover table-condensed">
+<thead>
+	<th class= "text-center" width="6%">No</th>
+	<th class= "text-center" width="12%">Word</th>
+	<th class= "text-center" width="44%">Dialogue</th>
 	<th class= "text-center" width="40%">Practice</th>
+</thead>
 	<c:forEach items="${list}" var="engboardVO">
 	<tr>
-		<td class="bid text-center" data-name="bid" style="width:10%">${engboardVO.bid}</td>
+		<td class="bid text-center" data-name="bid" style="width:6%">${engboardVO.bid}</td>
 		<td class="word text-center" data-name="word" data-editable style="width:10%">${engboardVO.word}</td>
-		<td class="dialogue" data-name="dialogue" data-editable style="width:40%">${engboardVO.dialogue}</td>
+		<td class="dialogue" data-name="dialogue" data-editable style="width:44%">${engboardVO.dialogue}</td>
 		<td class="practice" data-name="practice" data-editable style="width:40%">${engboardVO.practice}</td>
 	</tr>
 	</c:forEach>
 </table>
-
-<div>
-<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>
-<form role="search" action="search" method="get">
-	<input id="keywordInput" type="search">
-	<button type="button" id="searchBtn" class="btn btn-default">Search</button>
-</form>
-<br>
+<div class="input-group">
+	<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>&nbsp;
+	<button id="golist" type="button" class="btn btn-success">List</button>
+</div>
+	<form role="search" action="search" method="get">
+		<input id="keywordInput" type="search" value="${cri.keyword}">
+		<button type="button" id="searchBtn" class="btn btn-default">Search</button>
+	</form>
 	<nav>
 	  <ul class="pagination justify-content-center">
 	    <li class="page-item ${pageMaker.startPage==1?'disabled':'' }"/>
-	      <a class="page-link" href="/eng/board?page=${pageMaker.startPage-1}&perPageNum=${pageMaker.cri.getPerPageNum()}" tabindex="-1">Previous</a>
+	      <a class="page-link" href="/eng/board?page=${pageMaker.startPage-1}&perPageNum=${pageMaker.cri.getPerPageNum()}">Previous</a>
 	    </li>
 	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="page">
 			<li class="page-item ${pageMaker.cri.getPage()==page?'active':'' }">
-			<a class="page-link" href="/eng/board?page=${page}&perPageNum=${pageMaker.cri.getPerPageNum()}"> ${page}</a>
+			<a class="page-link" href="/eng/board${pageMaker.makeSearch(page)}"> ${page}</a>
 			</li>
 		</c:forEach>
-	    <li class="page-item">
+	    <li class="page-item ${pageMaker.endPage==pageMaker.startPage+4?'':'disabled'}">
 	      <a class="page-link" href="/eng/board?page=${pageMaker.endPage+1}&perPageNum=${pageMaker.cri.getPerPageNum()}">Next</a>
 	    </li>
 	  </ul>
 	</nav>
-</div>
+
 <div id="openNew" class="collapse bg-light">
 	<form id="addForm" action="/eng/board" method="POST">
 		<div class="form-group">
 	  		<label for="word">Word</label>
-			<input id="word" class="form-control" name="word" type="text" style="width:30%">
+			<input id="word" class="form-control" name="word" type="text" style="width:50%">
 		</div>
 		<div class="form-group">
 			<label for="dialogue">Dialogue</label>
-			<textarea id="dialogue" rows=2 name="dialogue" class="form-control" type="text" style="width:30%"></textarea>
+			<textarea id="dialogue" rows=2 name="dialogue" class="form-control" type="text" style="width:50%"></textarea>
 		</div>
 		<div class="form-group">
 	  		<label for="practice">Practice</label>
-			<input id="practice" class="form-control" name="practice" type="text" style="width:30%">
+			<input id="practice" class="form-control" name="practice" type="text" style="width:50%">
 		</div>
 	</form>
 	<button id="sendForm" type="button" class="btn btn-info">Send</button>
@@ -86,6 +84,10 @@ td {
 </div>
 </body>
 <script>
+var msg = "${msg}";
+if (msg=="SUCCESS") {
+	alert("완료되었습니다.");
+}
 
 $(".btn-info").click(function() {
     $('html,body').animate({
@@ -103,7 +105,7 @@ $("table").on("click", "[data-editable]", function(){
 	if ($clicked.find("textarea").length)
 	      return;
 	var $oldstr = $clicked.text();
-	var width = $clicked.attr('data-name') == "word"?"width:100px" : "width:450px";
+	var width = $clicked.attr('data-name') == "word"?"width:150px" : "width:450px";
 	var $newinput = $("<textarea rows=3 style='"+width+"'/>").val( $clicked.text() );
 	$clicked.html($newinput);
 	$newinput.focus();
@@ -144,14 +146,22 @@ $("table").on("click", "[data-editable]", function(){
         save(bid, newWord, newDialogue, newPractice)
     }); 
 });
+$("#keywordInput").keydown(function(key){
+	if(key.keyCode == 13) {
+		$("#searchBtn").click();
+		return false;
+	}
+})
+
+$("#golist").on("click", function(){
+	self.location="board${pageMaker.pageBuilder(1)}";
+})
 
 $("#searchBtn").on("click", function(){
 	console.log($(this));
-	self.location="search"
+	self.location="board"
 		+'${pageMaker.pageBuilder(1)}'
 		+"&searchType=t"+"&keyword=" + $('#keywordInput').val();
-	console.log(self.location);
 });
-
 </script>
 </html>

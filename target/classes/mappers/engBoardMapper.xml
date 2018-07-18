@@ -22,17 +22,20 @@
 	</select>
 	
 	<select id="searchList" resultType="com.jun.domain.EngBoardVO">
-		SELECT * from engboard WHERE bid>0 order by bid desc, regdate desc
-		<if test="searchType != null">
+		SELECT * from engboard WHERE bid>0
+		<if test="keyword != null">
 		AND word LIKE CONCAT ('%', #{keyword}, '%')
-		</if> 
+		</if>
+		order by bid desc, regdate desc
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="countSearchPage" resultType="int">
-		SELECT count(*) from engboard WHERE bid>0 order by bid desc, regdate desc
-		<if test="searchType != null">
+		SELECT count(*) from engboard WHERE bid>0
+		<if test="keyword != null">
 		AND word LIKE CONCAT ('%', #{keyword}, '%')
 		</if>
+		order by bid desc, regdate desc
 	</select>
 	
 </mapper>
