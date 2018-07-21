@@ -26,7 +26,9 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@RequestMapping(value="board", method=RequestMethod.GET)
-	public String engBoardGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	public String engBoardGET(
+			@ModelAttribute("cri") SearchCriteria cri
+			, Model model) throws Exception {
 		logger.info("Search called");
 		logger.info(cri.toString());
 		PageMaker pageMaker = new PageMaker();

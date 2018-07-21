@@ -3,11 +3,11 @@
 <html>
 <%@ include file="../include/header.jsp" %>
 <head>
-<title>Home</title>
+<title>English Board</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <style>
 table { table-layout: fixed; }
 table th, table td { overflow: hidden; }
@@ -39,28 +39,28 @@ td {
 	</c:forEach>
 </table>
 <div class="input-group">
-	<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>&nbsp;
+	<button id="openForm" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>&nbsp;
 	<button id="golist" type="button" class="btn btn-success">List</button>
 </div>
-	<form role="search" action="search" method="get">
-		<input id="keywordInput" type="search" value="${cri.keyword}">
-		<button type="button" id="searchBtn" class="btn btn-default">Search</button>
-	</form>
-	<nav>
-	  <ul class="pagination justify-content-center">
-	    <li class="page-item ${pageMaker.startPage==1?'disabled':'' }"/>
-	      <a class="page-link" href="/eng/board?page=${pageMaker.startPage-1}&perPageNum=${pageMaker.cri.getPerPageNum()}">Previous</a>
-	    </li>
-	    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="page">
-			<li class="page-item ${pageMaker.cri.getPage()==page?'active':'' }">
-			<a class="page-link" href="/eng/board${pageMaker.makeSearch(page)}"> ${page}</a>
-			</li>
-		</c:forEach>
-	    <li class="page-item ${pageMaker.endPage==pageMaker.startPage+4?'':'disabled'}">
-	      <a class="page-link" href="/eng/board?page=${pageMaker.endPage+1}&perPageNum=${pageMaker.cri.getPerPageNum()}">Next</a>
-	    </li>
-	  </ul>
-	</nav>
+<form role="search" action="search" method="get">
+	<input id="keywordInput" type="search" value="${cri.keyword}">
+	<button type="button" id="searchBtn" class="btn btn-default">Search</button>
+</form>
+<nav>
+  <ul class="pagination justify-content-center">
+    <li class="page-item ${pageMaker.startPage==1?'disabled':'' }"/>
+      <a class="page-link" href="/eng/board?page=${pageMaker.startPage-1}&perPageNum=${pageMaker.cri.getPerPageNum()}">Previous</a>
+    </li>
+    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="page">
+		<li class="page-item ${pageMaker.cri.getPage()==page?'active':'' }">
+		<a class="page-link" href="/eng/board${pageMaker.makeSearch(page)}"> ${page}</a>
+		</li>
+	</c:forEach>
+    <li class="page-item ${pageMaker.endPage==pageMaker.startPage+4?'':'disabled'}">
+      <a class="page-link" href="/eng/board?page=${pageMaker.endPage+1}&perPageNum=${pageMaker.cri.getPerPageNum()}">Next</a>
+    </li>
+  </ul>
+</nav>
 
 <div id="openNew" class="collapse bg-light">
 	<form id="addForm" action="/eng/board" method="POST">
@@ -80,19 +80,20 @@ td {
 	<button id="sendForm" type="button" class="btn btn-info">Send</button>
 	<button id="cancel" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#openNew">Cancel</button>
 </div>
-<div class="bottom"/>
+<div class="bottom"></div>
 </div>
 </body>
 <script>
+
 var msg = "${msg}";
 if (msg=="SUCCESS") {
 	alert("완료되었습니다.");
-}
+};
 
-$(".btn-info").click(function() {
+$("#openForm").click(function() {
     $('html,body').animate({
-        scrollTop: $(".bottom").offset().top},
-        'slow');
+    	scrollTop: $(".bottom").offset().top}, 
+    	'slow');
 });
 
 var formObj = $("#addForm");

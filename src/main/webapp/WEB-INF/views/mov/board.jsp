@@ -6,11 +6,11 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<title>Movie Board</title>
 <style>
 .card {
 	margin : 5px;
@@ -20,7 +20,7 @@
   width: 970px;
 }
 #overlay {
-    position: fixed;
+    position: absoulte;
     display: none;
     width: 100%;
     height: 100%;
@@ -29,12 +29,10 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 2;
 }
 </style>
 </head>
 <body style="height:1000px">
-
 
 <div class="col bg-dark text-white" style="width:100%; padding-left:0px; overflow:hidden">
 	<img src="https://dummyimage.com/2000x250/078736/fff.png">
@@ -106,21 +104,67 @@
     <img class="card-img-top"src="https://dummyimage.com/277x200/078736/fff.png" alt="Card image cap">
   </div>
 </div>
+<button type="button" id="hideBtn" class="btn">Close</button>
 <div id="overlay">
 <div id="overlayform"></div>
 </div>
-<div id="openDiv" class="containter" style="width:50%; height:100%; top:20%; background-color:white; position:absolute; z-index:5; overflow:scroll">
-	<form class="form">
-		<input id="movName" class="form-control" name="contents" type="text" style="height:400px"><br>
-		<label>줄거리</label>
-		<input id="movContents" class="form-control" name="contents" type="text" style="height:300px"><br>
-		<label>상영시간</label>
-		<input id="movTime" class="form-control" name="runtime" type="text"><br>
-		<label>조회 수</label>
-		<input id="movView" class="form-control" name="viewcnt" type="text"><br>
-		<button type="button" id="closeBtn" class="btn">Close</button>
-	</form>
 </div>
+<div id="openDiv" class="containter" style="width:75%; height:100%; top:20%; left:12.5%; background-color:white; position:absolute; overflow:scroll">
+	<form class="form">
+		<div id="movImg" style="height:300px">
+			<div style="padding-top:255px">
+				<div class="row" style="color:white">
+					<div class="col-2 text-center"></div>
+					<div class="col-2 text-center">
+						<div><span class="badge badge-primary">예상별점</span></div>
+						<div><span>4.0</span></div>
+					</div>
+					<div class="col-2 text-center">
+						<div><span class="badge badge-primary">예매율</span></div>
+						<div><span>55%</span></div>
+					</div>
+					<div class="col-2 text-center">
+						<div><span class="badge badge-primary">누적관객수</span></div>
+						<div><span>3,305,827명</span></div>
+					</div>
+					<div class="col-2 text-center">
+						<div><span class="badge badge-primary">개봉일</span></div>
+						<div><span>D+2</span></div>
+					</div>
+					<div class="col-2 text-center"></div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="container">
+		<label class="label"><b>영화명</b></label>
+		<input id="movName" class="form-control" name="contents" type="text" readonly><br><br>
+		<label><b>줄거리</b></label>
+		<textbox id="movContents" class="form-control" name="contents" type="text" style="height:200px"></textbox>
+	</form>
+	<br>
+	<label><b>댓글</b></label>
+	<div class="input-bar">
+        <div class="input-bar-item">
+          <form>
+             <div class="input-group">
+                <input class="form-control">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-info">MyButton</button>
+                </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div>
+      <ul>
+		<li>21123123</li>      
+		<li>21123123</li>      
+		<li>21123123</li>      
+		<li>21123123</li>      
+      </ul>
+      </div>
+	</div>
 </body>
 <script>
 
@@ -134,8 +178,9 @@ function openOverlay(mid){
 			url : "board/detail/"+mid,
 			type : "post",
 			success : function(result){
+				$("#movImg").css("background-image", "url(" + result.imgpath + ")");
 				$("#movName").val(result.name);
-				$("#movContents").val(result.contents);
+				$("#movContents").text(result.contents);
 				$("#movTime").val(result.runtime);
 				$("#movView").val(result.viewcnt);
 			},
@@ -146,9 +191,10 @@ function openOverlay(mid){
 		});
 	});
 }; 
-$("#closeBtn").on("click", function(){
- 	$("#overlay").css("display", "none");
+$("#closeBtn").click(function(){
+	console.log("close got");
 	$("#openDiv").hide();
+ 	/* $("#overlay").css("display", "none"); */
 });
 </script>
 </html>
