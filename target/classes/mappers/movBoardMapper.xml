@@ -6,27 +6,27 @@
 <mapper namespace="movBoardMapper">
 
 	<insert id="create">
-		INSERT INTO movie_contents (name, contents, runtime, imgpath) VALUES (#{name}, #{contents}, #{runtime}, #{imgpath}) 
+		INSERT INTO movBoard (name, contents, runtime, imgpath) VALUES (#{name}, #{contents}, #{runtime}, #{imgpath}) 
 	</insert>
 	
 	<select id="read" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, regdate, moddate, imgpath FROM movie_contents where mid = #{mid}
+		SELECT mid, name, contents, runtime, viewcnt, regdate, moddate, imgpath FROM movBoard where mid = #{mid}
 	</select>
 	
 	<update id="update">
-		UPDATE movie_contents SET name = #{name}, contents = #{contents}, runtime = #{runtime}, imgpath = #{imgpath} where mid=#{mid}
+		UPDATE movBoard SET name = #{name}, contents = #{contents}, runtime = #{runtime}, imgpath = #{imgpath} where mid=#{mid}
 	</update>
 	
 	<select id="readTop" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt FROM movie_contents order by viewcnt desc LIMIT 0, 3 
+		SELECT mid, name, contents, runtime, viewcnt FROM movBoard order by viewcnt desc LIMIT 0, 3 
 	</select>
 	
 	<select id="readMid" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt FROM movie_contents order by viewcnt desc LIMIT 4, 6 
+		SELECT mid, name, contents, runtime, viewcnt FROM movBoard order by viewcnt desc LIMIT 4, 6 
 	</select>
 	
 	<select id="readAll" resultType="com.jun.domain.MovBoardVO">
-		SELECT * FROM movie_contents order by regdate desc LIMIT 0, 5
+		SELECT * FROM movBoard order by regdate desc LIMIT 0, 5
 	</select>
 	
 </mapper>

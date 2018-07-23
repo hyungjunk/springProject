@@ -83,6 +83,7 @@ function deleteContent(mid){
 			success : function(msg){
 				if (msg=="success"){
 					alert("삭제가 완료되었습니다.");
+					location.reload();
 				}
 			},
 			error : function(){

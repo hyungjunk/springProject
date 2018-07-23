@@ -58,12 +58,15 @@ public class MovBoardVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
+
 	public String getImgpath() {
 		return imgpath;
 	}
+
 	public void setImgpath(String imgpath) {
 		this.imgpath = imgpath;
 	}
+
 	@Override
 	public String toString() {
 		return "MovBoardVO [mid=" + mid + ", name=" + name + ", contents=" + contents + ", runtime=" + runtime

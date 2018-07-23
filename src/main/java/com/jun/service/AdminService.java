@@ -1,6 +1,9 @@
 package com.jun.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.jun.domain.Criteria;
 import com.jun.domain.MovBoardVO;

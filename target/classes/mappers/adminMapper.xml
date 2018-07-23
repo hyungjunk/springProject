@@ -6,27 +6,31 @@
 <mapper namespace="adminMapper">
 
 	<insert id="create">
-		INSERT INTO movie_contents (name, contents, runtime, imgpath) VALUES (#{name}, #{contents}, #{runtime}, #{imgpath}) 
+		INSERT INTO movBoard (name, contents, runtime, imgpath) VALUES (#{name}, #{contents}, #{runtime}, #{imgpath}) 
 	</insert>
 	
 	<select id="read" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, regdate, moddate, imgpath FROM movie_contents where mid = #{mid}
+		SELECT mid, name, contents, runtime, viewcnt, regdate, moddate, imgpath FROM movBoard where mid = #{mid}
 	</select>
 	
 	<update id="update">
-		UPDATE movie_contents SET name = #{name}, contents = #{contents}, runtime = #{runtime}, imgpath = #{imgpath} where mid=#{mid}
+		UPDATE movBoard SET name = #{name}, contents = #{contents}, runtime = #{runtime}, imgpath = #{imgpath} where mid=#{mid}
 	</update>
 	
 	<select id="readAll" resultType="com.jun.domain.MovBoardVO">
-		SELECT * FROM movie_contents order by regdate desc LIMIT #{pageStart}, #{perPageNum}
+		SELECT * FROM movBoard order by regdate desc LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="totalCount" resultType="int">
-		SELECT count(*) FROM movie_contents
+		SELECT count(*) FROM movBoard
 	</select>
 	
 	<delete id="delete">
-		DELETE from movie_contents where mid = #{mid}
+		DELETE from movBoard where mid = #{mid}
 	</delete>
 	
+	<insert id="addAttach">
+		insert into tb_file(fullName, bno) values (#{fullName}, LAST_INSERT_ID())
+	</insert>
+
 </mapper>

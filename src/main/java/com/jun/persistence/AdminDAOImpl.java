@@ -1,8 +1,10 @@
 package com.jun.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -48,5 +50,4 @@ public class AdminDAOImpl implements AdminDAO {
 		session.delete(namespace+".delete", mid);
 	}
 
-	
 }

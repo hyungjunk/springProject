@@ -1,6 +1,7 @@
 package com.jun.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jun.domain.Criteria;
 import com.jun.domain.MovBoardVO;
@@ -18,4 +19,5 @@ public interface AdminDAO {
 	public int totalCount() throws Exception;
 	
 	public void delete(int mid) throws Exception;
+	
 }

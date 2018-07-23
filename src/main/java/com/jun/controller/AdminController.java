@@ -1,6 +1,15 @@
 package com.jun.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +18,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jun.domain.Criteria;
 import com.jun.domain.MovBoardVO;
 import com.jun.domain.PageMaker2;
 import com.jun.service.AdminServiceImpl;
+import com.jun.util.CommonsUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +34,9 @@ import org.slf4j.LoggerFactory;
 @Controller
 @RequestMapping("/admin*")
 public class AdminController {
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	@Inject
 	private AdminServiceImpl service;
@@ -34,7 +49,6 @@ public class AdminController {
 			, Criteria cri
 			, Model model
 			) throws Exception {
-		logger.info("got main");
 		PageMaker2 pageMaker = new PageMaker2();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.totalCount());
@@ -94,6 +108,11 @@ public class AdminController {
 			) throws Exception {
 		service.delete(mid);
 		return "success";
+	}
+	
+	@RequestMapping(value = "/file/test", method = {RequestMethod.GET} )
+	public String fileTest() throws Exception {
+		return "/admin/filetest";
 	}
 	
 }

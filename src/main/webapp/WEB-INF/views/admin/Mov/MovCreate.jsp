@@ -23,7 +23,7 @@ textarea {
 </div>
 <hr>
 <div class="form-group">
-<form role="form" action="/admin/mov/create" method="post">
+<form role="form" action="/admin/mov/create" method="post" enctype="multipart/form-data">
 	  <div class="form-row">
 	    <div class="col-3">
 	      <label>영화명</label>
