@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, regdate, moddate, imgpath FROM movBoard where mid = #{mid}
+		SELECT mid, name, contents, runtime, viewcnt, regdate, updatedate, imgpath FROM movBoard where mid = #{mid}
 	</select>
 	
 	<update id="update">

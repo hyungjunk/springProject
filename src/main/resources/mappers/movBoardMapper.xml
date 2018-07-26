@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, regdate, moddate, imgpath FROM movBoard where mid = #{mid}
+		SELECT mid, name, contents, runtime, viewcnt, regdate, updatedate, imgpath FROM movBoard where mid = #{mid}
 	</select>
 	
 	<update id="update">
@@ -27,6 +27,14 @@
 	
 	<select id="readAll" resultType="com.jun.domain.MovBoardVO">
 		SELECT * FROM movBoard order by regdate desc LIMIT 0, 5
+	</select>
+	
+	<select id="rankList" resultType="com.jun.domain.MovBoardVO">
+		SELECT name FROM movBoard order by viewcnt desc LIMIT 0, 10
+	</select>
+	
+	<select id="genreList" resultType="com.jun.domain.MovBoardVO">
+		SELECT name, imgpath FROM movBoard where genre = #{genre} order by viewcnt desc LIMIT 0, 10
 	</select>
 	
 </mapper>

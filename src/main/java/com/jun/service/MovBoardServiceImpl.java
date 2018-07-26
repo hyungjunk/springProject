@@ -45,4 +45,14 @@ public class MovBoardServiceImpl implements MovBoardService {
 		return dao.readAll();
 	}
 
+	@Override
+	public List<MovBoardVO> rankList() throws Exception {
+		return dao.rankList();
+	}
+
+	@Override
+	public List<MovBoardVO> genreList(String genre) throws Exception {
+		return dao.genreList(genre);
+	}
+
 }

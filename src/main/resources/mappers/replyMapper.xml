@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReplyDAO">
+
+	<insert id="createReply">
+		insert into tbl_reply(mid, uname, utext, regdate) values (#{mid}, #{uname}, #{utext}, #{regdate})
+	</insert>
+
+	<select id="showReplyList" resultType="com.jun.domain.ReplyVO">
+		select * from tbl_reply where mid = #{mid}
+	</select>
+
+</mapper>

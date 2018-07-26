@@ -18,12 +18,12 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/eng/*")
-public class BoardController {
+public class EngBoardController {
 	
 	@Autowired(required=false)
 	private EngBoardService service;
 	
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(EngBoardController.class);
 	
 	@RequestMapping(value="board", method=RequestMethod.GET)
 	public String engBoardGET(

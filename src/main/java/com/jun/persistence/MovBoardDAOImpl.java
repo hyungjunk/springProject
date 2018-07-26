@@ -47,4 +47,14 @@ public class MovBoardDAOImpl implements MovBoardDAO {
 		return session.selectList(namespace+".readAll");
 	}
 
+	@Override
+	public List<MovBoardVO> rankList() throws Exception {
+		return session.selectList(namespace+".rankList");
+	}
+
+	@Override
+	public List<MovBoardVO> genreList(String genre) throws Exception {
+		return session.selectList(namespace+".genreList", genre);
+	}
+
 }

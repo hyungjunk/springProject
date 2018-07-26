@@ -9,9 +9,10 @@ public class MovBoardVO {
 	private String contents;
 	private String runtime;
 	private Date regdate;
-	private Date moddate;
+	private Date updatedate;
 	private int viewcnt;
 	private String imgpath;
+	private String tier;
 	
 	public MovBoardVO() {
 	}
@@ -46,12 +47,15 @@ public class MovBoardVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public Date getModdate() {
-		return moddate;
+
+	public Date getUpdatedate() {
+		return updatedate;
 	}
-	public void setModdate(Date moddate) {
-		this.moddate = moddate;
+
+	public void setUpdatedate(Date updatedate) {
+		this.updatedate = updatedate;
 	}
+
 	public int getViewcnt() {
 		return viewcnt;
 	}
@@ -66,12 +70,20 @@ public class MovBoardVO {
 	public void setImgpath(String imgpath) {
 		this.imgpath = imgpath;
 	}
+	
+	public String getTier() {
+		return tier;
+	}
+
+	public void setTier(String tier) {
+		this.tier = tier;
+	}
 
 	@Override
 	public String toString() {
 		return "MovBoardVO [mid=" + mid + ", name=" + name + ", contents=" + contents + ", runtime=" + runtime
-				+ ", regdate=" + regdate + ", moddate=" + moddate + ", viewcnt=" + viewcnt + ", imgpath=" + imgpath
-				+ "]";
+				+ ", regdate=" + regdate + ", updatedate=" + updatedate + ", viewcnt=" + viewcnt + ", imgpath=" + imgpath
+				+ ", tier=" + tier + "]";
 	}
 	
 }

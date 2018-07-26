@@ -23,7 +23,7 @@ public class MovRestControll {
 	@Autowired(required = false)
 	private MovBoardServiceImpl service;
 	
-	private static final Logger logger = LoggerFactory.getLogger(MovieController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MovBoardController.class);
 	
 	@RequestMapping("/board/detail/{bid}")
 	public ResponseEntity<MovBoardVO> getMovInfo(@PathVariable("bid") int bid, Criteria cri, Model model) throws Exception {
@@ -33,5 +33,4 @@ public class MovRestControll {
 		entity = new ResponseEntity<>(vo, HttpStatus.OK);
 		return entity;
 	}
-	
 }

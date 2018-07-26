@@ -17,4 +17,8 @@ public interface MovBoardService {
 	public List<MovBoardVO> readMid() throws Exception;
 	
 	public List<MovBoardVO> readAll() throws Exception;
+	
+	public List<MovBoardVO> rankList() throws Exception;
+	
+	public List<MovBoardVO> genreList(String genre) throws Exception;
 }

@@ -83,6 +83,22 @@ public class PageMaker {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
+	
+	public boolean getPrev() {
+		return prev;
+	}
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+	public boolean getNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
 
 	@Override
 	public String toString() {

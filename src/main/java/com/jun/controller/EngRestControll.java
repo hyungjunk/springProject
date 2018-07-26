@@ -18,12 +18,12 @@ import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/modify")
-public class RestControll {
+public class EngRestControll {
 
 	@Inject
 	private EngBoardService service;
 	
-	private static final Logger logger = LoggerFactory.getLogger(RestControll.class);
+	private static final Logger logger = LoggerFactory.getLogger(EngRestControll.class);
 	
 	@RequestMapping(value="/{bid}", method=RequestMethod.POST)
 	public ResponseEntity<String> test(@PathVariable("bid") int bid, @RequestBody EngBoardVO engboardVO) throws Exception {
