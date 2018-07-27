@@ -7,7 +7,9 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.jun.domain.EngBoardVO;
 import com.jun.domain.MovBoardVO;
+import com.jun.domain.SearchCriteria;
 
 @Repository
 public class MovBoardDAOImpl implements MovBoardDAO {
@@ -55,6 +57,16 @@ public class MovBoardDAOImpl implements MovBoardDAO {
 	@Override
 	public List<MovBoardVO> genreList(String genre) throws Exception {
 		return session.selectList(namespace+".genreList", genre);
+	}
+
+	@Override
+	public List<EngBoardVO> readBoard(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".readBoard", cri);
+	}
+
+	@Override
+	public int countPost() throws Exception {
+		return session.selectOne(namespace+".countPost");
 	}
 
 }

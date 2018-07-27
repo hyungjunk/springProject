@@ -2,7 +2,9 @@ package com.jun.service;
 
 import java.util.List;
 
+import com.jun.domain.EngBoardVO;
 import com.jun.domain.MovBoardVO;
+import com.jun.domain.SearchCriteria;
 
 public interface MovBoardService {
 
@@ -21,4 +23,8 @@ public interface MovBoardService {
 	public List<MovBoardVO> rankList() throws Exception;
 	
 	public List<MovBoardVO> genreList(String genre) throws Exception;
+	
+	public List<EngBoardVO> readBoard(SearchCriteria cri) throws Exception;
+	
+	public int countPost() throws Exception;
 }

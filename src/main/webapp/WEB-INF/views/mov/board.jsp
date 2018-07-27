@@ -132,12 +132,10 @@ body {
 	<div class="container">
 		<!-- Movie Curation Text Header -->
 		<div class="row">
-			<p>
-			<h5>Yolo world</h5>
-			</p>
-		</div>
+			<p>	<h3>What's going on?</h3> </p>
+		</div> <br>
 		<!-- Movie Curation -->
-		
+
 		<!-- 
 		부트스트랩의 modal을 활용한 Overlay이다.
 		클릭하면 내용이 나오는데 약점이 있다.
@@ -148,23 +146,21 @@ body {
 		 -->
 		<div class="row">
 			<div class="col-3">
-				<div class="card" style="height: 600px; background-color: green;">
+				<div class="card bg-light">
 					<h5>현재 랭킹 순위</h5>
 					<br>
 					<div class="list-group">
 						<c:forEach items="${rank}" var="movBoardVO" varStatus="status">
-							<a href="#" class="list-group-item list-group-item-action">${status.count}.
-								${movBoardVO.name}</a>
+							<li class="list-group-item list-group-item-action">
+							${status.count}. ${movBoardVO.name}</li>
 						</c:forEach>
 					</div>
 				</div>
 			</div>
 			<div class="col-6">
 				<div class="box">
-					<div class="imgBox" data-toggle="modal" data-target="#Content"
-						onclick="getMovieInfo(${top[0].mid})">
-						<img class="card-img-top"
-							src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000080/80793/80793_1000.jpg">
+					<div class="imgBox" data-toggle="modal" data-target="#Content" onclick="getMovieInfo(${top[0].mid})">
+						<img class="card-img-top" src="${top[0].imgpath}">
 						<div class="content">
 							<div class="description" style="background-color: white">
 								<h3 class="text-center align-middle">${top[0].name}</h3>
@@ -179,11 +175,12 @@ body {
 				<div class="box">
 					<div class="imgBox" data-toggle="modal" data-target="#Content"
 						onclick="getMovieInfo(${top[1].mid})">
-						<img class="card"
-							src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1529024278/wre0ikxt1tucs9nujmn2.jpg">
+						<img class="card" src="${top[1].imgpath}">
 						<div class="content">
 							<div class="description" style="background-color: white">
-								<h5 class="text-center align-middle"><strong>${top[1].name}</strong></h5>
+								<h5 class="text-center align-middle">
+									<strong>${top[1].name}</strong>
+								</h5>
 								<hr>
 								<p class="text-center">Hahaha</p>
 							</div>
@@ -192,13 +189,13 @@ body {
 				</div>
 				<div class="box">
 					<div class="imgBox" data-toggle="modal" data-target="#Content"
-						onclick="getMovieInfo(5)">
-						<img class="card" id="${top[2].mid}"
-							src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1529024278/wre0ikxt1tucs9nujmn2.jpg"
-							styel="width:100%">
+						onclick="getMovieInfo(${top[2].mid})">
+						<img class="card" src="${top[2].imgpath}">
 						<div class="content">
 							<div class="description" style="background-color: white">
-								<h5 class="text-center"><strong>${top[2].name}</strong></h3>
+								<h5 class="text-center">
+									<strong>${top[2].name}</strong>
+									</h3>
 									<hr>
 									<p class="text-center">Hahaha</p>
 							</div>
@@ -208,7 +205,7 @@ body {
 			</div>
 		</div>
 
-<!-- Carousel이라는 것이 이미지 슬라이드 가능하게 해주는 거고 data-interval false로 자동슬라이드 안되게 함. 
+		<!-- Carousel이라는 것이 이미지 슬라이드 가능하게 해주는 거고 data-interval false로 자동슬라이드 안되게 함. 
 row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되게 함.
 -->
 		<br>
@@ -236,16 +233,21 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 			<div class="col-9">
 				<div class="row bg-dark">
 					<div id="carouselExampleControls" class="carousel slide"
-						data-interval="false" data-ride="carousel">
+						data-interval="3000" data-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<div class="row  bg-light justify-content-center">
-									<div class="col-6">
+								<div class="row bg-light justify-content-center">
+									<div class="col-4">
 										<img class="d-block"
 											src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1531362451/faj2bznbcurkzeo6u7hc.jpg"
 											alt="First slide">
 									</div>
-									<div class="col-6">
+									<div class="col-4">
+										<img class="d-block"
+											src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1531362451/faj2bznbcurkzeo6u7hc.jpg"
+											alt="First slide">
+									</div>
+									<div class="col-4">
 										<img class="d-block"
 											src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1531362451/faj2bznbcurkzeo6u7hc.jpg"
 											alt="First slide">
@@ -253,7 +255,7 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 								</div>
 							</div>
 							<div class="carousel-item">
-								<div class="row">
+								<div class="row bg-light justify-content-center">
 									<div class="col-6">
 										<img class="d-block"
 											src="https://dummyimage.com/650x400/083236/fff.png"
@@ -300,64 +302,51 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 			<h3>Comments</h3>
 			<hr>
 		</div>
-		<div class="row bg-dark" style="height: 300px">보드보드보드</div>
-
-
+		<div class="row" style="height: 300px">
+		<%@ include file="freeboard.jsp" %>
+		</div>
 	</div>
 	<div id="Content" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<div class="modal-header inner-big-cut"
-					style="background-image: url(https://dummyimage.com/650x400/083236/fff.png)">
+				<div class="modal-header" style="padding:0px;">
+					<img style="width:100%" id="imgpathInnerBig">
+				    <button style="position:absolute; top:20px; right:20px;" type="button" class="close" data-dismiss="modal">&times;</button>
+			    </div>
+	<!-- 			<div class="modal-header inner-big-cut" style="background-image: url(https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_720,q_80,w_1280/v1531460398/dcumd1ue3jplkhwaurja.jpg)">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
+				</div> -->
 				<div class="modal-body">
 					<div>
-						<div class="row bg-dark" style="color: white">
+						<div class="row" style="color: black">
 							<div class="col-2 text-center"></div>
 							<div class="col-2 text-center">
-								<div>
-									<span class="badge badge-primary">예상별점</span>
-								</div>
-								<div>
-									<span>4.0</span>
-								</div>
+								<div><span class="badge badge-primary">예상별점</span>	</div>
+								<div><span>4.0</span></div>
 							</div>
 							<div class="col-2 text-center">
-								<div>
-									<span class="badge badge-primary">예매율</span>
-								</div>
-								<div>
-									<span>55%</span>
-								</div>
+								<div><span class="badge badge-primary">예매율</span></div>
+								<div><span>55%</span></div>
 							</div>
 							<div class="col-2 text-center">
-								<div>
-									<span class="badge badge-primary">누적관객수</span>
-								</div>
-								<div>
-									<span>3,305,827명</span>
-								</div>
+								<div><span class="badge badge-primary">누적관객수</span></div>
+								<div><span>3,305,827명</span></div>
 							</div>
 							<div class="col-2 text-center">
-								<div>
-									<span class="badge badge-primary">개봉일</span>
-								</div>
-								<div>
-									<span>D+2</span>
-								</div>
+								<div><span class="badge badge-primary">개봉일</span></div>
+								<div><span>D+2</span></div>
 							</div>
 							<div class="col-2 text-center"></div>
-						</div>
+						</div><hr>
 						<div id="movieContent">
-						<script id="movieModal" type="text/x-handlebars-template">
+							<script id="movieModal" type="text/x-handlebars-template">
 							<div class="bg-gray row" style="width:100%;">
 							<div class="col-3 inner-small-cut">
-								<img src="https://dummyimage.com/200x270/024236/fff.png">
+							  <img src="{{imgpathInnerSmall}}">
 							</div>
+                            <br>
 							<div class="col-9">
-							<br>
-							<h5>{{name}}</h5>
+							<h3><strong>{{name}}</strong></h3>
 							<small> 상영시간 : {{runtime}} 분</small><br>
 							<small> 조회수 : {{viewcnt}}</small><br><br>
 							{{contents}}<br><br><br>
@@ -365,29 +354,31 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 							</div>
 						</script>
 						</div>
-						<div id="movieComment">
-						<script id="commentModal" type="text/x-handlebars-template">
 						<div class="row">
 						<div id="movieComments" class="col-8 bg-light">
-						<h5>Comment <strong> [ ]</strong></h5>
-						<div class="input-group">
-						  <input type="text" class="form-control">
-						  <span class="input-group-btn">
-						    <button class="btn btn-default" type="button" onclick="addReply()">Go!</button>
-						  </span>
-						</div>
-						{{#each .}}
-						 <li class="replyLi">
-						{{rid}} ::: {{uname}}::: {{utext}}
-						</li>
-						{{/each }}
+							<h5>Comment <strong> [ ]</strong></h5>
+							<div class="input-group">
+							  <input type="hidden" id="mid" value="">
+							  <input type="text" id="uname" class="form-control">
+							  <input type="text" id="utext" class="form-control">
+							  <span class="input-group-btn">
+							    <button class="btn btn-default" type="button" onclick="addReply()">Go!</button>
+							  </span>
+							</div>
+							<div id="movieComment">
+							<script id="commentModal" type="text/x-handlebars-template">
+						    {{#each .}}
+						     <li class="replyLi">
+					    	{{uname}} ::: {{utext}}
+						    </li>
+						    {{/each }}
+							</script>
+							</div>
 						</div>
 						<div class="col-4">
-						유튜브 임베드<br>
-						여기에 또 Modal 넣어서 유튜브 영상 뜨도록~~~
+							유튜브 임베드<br>
+							여기에 또 Modal 넣어서 유튜브 영상 뜨도록~~~
 						</div>
-						</div>
-				</script>
 						</div>
 					</div>
 				</div>
@@ -397,7 +388,6 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 			</div>
 		</div>
 	</div>
-
 </body>
 <script>
 var infoTemplate = $("#movieModal").html();
@@ -410,20 +400,22 @@ function getMovieInfo(mid) {
 		url : "/mov/board/detail/" + mid,
 		data : "application/json",
 		success : function(data) {
+			$("#imgpathInnerBig").attr("src", data.imgpathInnerBig);
 			var template = Handlebars.compile(infoTemplate);
 			$("#movieContent").html(template(data));
 			getComments(mid);
 		},
 		error : function(data) {
-			alert("영화 정보를 가져오는데 에러가 발생했습니다.");
+			alert("영화 정보를 가져오는데 오류가 발생했습니다.");
 			location.reload();
 		}
 	});
 };
 
 function getComments(mid) {
-	console.log(mid);
 	console.log("comments called");
+	console.log(mid);
+	$("#mid").val(mid);
 	$.ajax({
 		type : "get",
 		url : "/mov/reply/" + mid,
@@ -433,25 +425,33 @@ function getComments(mid) {
 			$("#movieComment").html(template(data));
 		},
 		error : function(data) {
-			alert("댓글 목록을 가져오는 중에 에러가 발생했습니다.");
+			alert("댓글 목록을 가져오는 중에 오류가 발생했습니다.");
 		}
 	});
 };
 
-function addReply(mid) {
+function addReply() {
 	console.log("add reply called");
+	var mid = $("#mid").val();
+	var uname = $("#uname").val();
+	var utext = $("#utext").val();
 	$.ajax({
 		type : "POST",
 		url : "/mov/reply/" + mid,
-		data : "text/html",
+		headers: { 
+		      "Content-Type": "application/json",
+		      "X-HTTP-Method-Override": "POST" },
+		data : JSON.stringify({
+			mid : mid,
+			uname : uname,
+			utext : utext
+		}),
 		success : function(data) {
-			if (data == "success") {
-				alert("등록 완료");
-				getComments();
-			}
+			alert("등록 완료");
+			getComments(mid);
 		},
 		error : function(data) {
-			alert("댓글을 등록하는 중에 발생했습니다.");
+			alert("댓글을 등록하는 중에 오류가 발생했습니다.");
 		}
 	});
 };

@@ -11,12 +11,13 @@ public class MovBoardVO {
 	private Date regdate;
 	private Date updatedate;
 	private int viewcnt;
-	private String imgpath;
 	private String tier;
+	private String imgpath;
+	private String imgpathInnerBig;
+	private String imgpathInnerSmall;
 	
 	public MovBoardVO() {
 	}
-	
 	public int getMid() {
 		return mid;
 	}
@@ -77,6 +78,22 @@ public class MovBoardVO {
 
 	public void setTier(String tier) {
 		this.tier = tier;
+	}
+
+	public String getImgpathInnerBig() {
+		return imgpathInnerBig;
+	}
+
+	public void setImgpathInnerBig(String imgpathInnerBig) {
+		this.imgpathInnerBig = imgpathInnerBig;
+	}
+
+	public String getImgpathInnerSmall() {
+		return imgpathInnerSmall;
+	}
+
+	public void setImgpathInnerSmall(String imgpathInnerSmall) {
+		this.imgpathInnerSmall = imgpathInnerSmall;
 	}
 
 	@Override

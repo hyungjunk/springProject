@@ -11,6 +11,6 @@ public interface ReplyService {
 
 	public List<ReplyVO> showReplyList(int mid) throws Exception;
 	
-	public void createReply(int mid, ReplyVO vo) throws Exception;
+	public void createReply(ReplyVO vo) throws Exception;
 	
 }

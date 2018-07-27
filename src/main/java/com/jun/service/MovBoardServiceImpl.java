@@ -6,7 +6,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.jun.domain.EngBoardVO;
 import com.jun.domain.MovBoardVO;
+import com.jun.domain.SearchCriteria;
 import com.jun.persistence.MovBoardDAO;
 
 @Service
@@ -55,4 +57,14 @@ public class MovBoardServiceImpl implements MovBoardService {
 		return dao.genreList(genre);
 	}
 
+	@Override
+	public List<EngBoardVO> readBoard(SearchCriteria cri) throws Exception {
+		return dao.readBoard(cri);
+	}
+
+	@Override
+	public int countPost() throws Exception {
+		return dao.countPost();
+	}
+	
 }

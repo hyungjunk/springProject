@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,11 +46,12 @@ public class ReplyController {
 
 	// ´ñ±Û ´Þ±â
 	@RequestMapping(value = "{mid}", method=RequestMethod.POST)
-	public ResponseEntity<String> createReply(@PathVariable("mid") int mid) {
+	public ResponseEntity<String> createReply(@RequestBody ReplyVO vo) {
 		logger.info("/mov/reply/{mid}, POST");
 		ResponseEntity<String> entity = null;
 		try {
-//			service.createReply(mid);
+			logger.info("------------"+vo.toString());
+			service.createReply(vo);
 			entity = new ResponseEntity<String>("Success", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

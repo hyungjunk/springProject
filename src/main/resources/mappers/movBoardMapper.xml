@@ -10,7 +10,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, regdate, updatedate, imgpath FROM movBoard where mid = #{mid}
+		SELECT mid, name, contents, runtime, viewcnt, regdate, imgpath, imgpathInnerBig, imgpathInnerSmall FROM movBoard where mid = #{mid}
 	</select>
 	
 	<update id="update">
@@ -18,11 +18,11 @@
 	</update>
 	
 	<select id="readTop" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt FROM movBoard order by viewcnt desc LIMIT 0, 3 
+		SELECT mid, name, contents, runtime, viewcnt, imgpath FROM movBoard order by viewcnt desc LIMIT 0, 3 
 	</select>
 	
 	<select id="readMid" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt FROM movBoard order by viewcnt desc LIMIT 4, 6 
+		SELECT mid, name, contents, runtime, viewcnt, imgpath FROM movBoard order by viewcnt desc LIMIT 4, 6 
 	</select>
 	
 	<select id="readAll" resultType="com.jun.domain.MovBoardVO">
@@ -35,6 +35,14 @@
 	
 	<select id="genreList" resultType="com.jun.domain.MovBoardVO">
 		SELECT name, imgpath FROM movBoard where genre = #{genre} order by viewcnt desc LIMIT 0, 10
+	</select>
+	
+	<select id="readBoard" resultType="com.jun.domain.EngBoardVO">
+		SELECT * FROM engBoard order by updatedate desc LIMIT #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="countPost" resultType="int">
+		SELECT count(*) FROM engBoard 
 	</select>
 	
 </mapper>

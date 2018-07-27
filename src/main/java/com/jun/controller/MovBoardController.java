@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jun.domain.MovBoardVO;
+import com.jun.domain.PageMaker;
+import com.jun.domain.SearchCriteria;
 import com.jun.service.MovBoardServiceImpl;
 
 import org.slf4j.Logger;
@@ -25,11 +27,18 @@ public class MovBoardController {
 	private static final Logger logger = LoggerFactory.getLogger(MovBoardController.class);
 
 	@RequestMapping(value = "board", method = RequestMethod.GET)
-	public String showMovieBoard(Model model) throws Exception {
+	public String showMovieBoard(
+			Model model
+			, SearchCriteria cri) throws Exception {
 		logger.info("/mov/board");
-		model.addAttribute("rank", service.rankList());
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(service.countPost());
+		model.addAttribute("rank", service.rankList());  // 랭킹 노출
 		model.addAttribute("top", service.readTop()); // top 가져오기
 		model.addAttribute("mid", service.readMid()); // mid 가져오기
+		model.addAttribute("board", service.readBoard(cri)); // 게시판 글 가져오기
+		model.addAttribute("pageMaker", pageMaker); // 게시판 글 페이징 객체
 		return "/mov/board";
 	}
 	

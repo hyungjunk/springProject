@@ -21,8 +21,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public void createReply(int mid, ReplyVO vo) throws Exception {
-		dao.createReply(mid, vo);
+	public void createReply(ReplyVO vo) throws Exception {
+		dao.createReply(vo);
 	}
 	
 }

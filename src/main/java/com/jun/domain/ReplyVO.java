@@ -9,6 +9,7 @@ public class ReplyVO {
 	private String uname;
 	private String utext;
 	private Date regdate;
+	
 	public Integer getRid() {
 		return rid;
 	}
