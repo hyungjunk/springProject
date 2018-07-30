@@ -1,5 +1,7 @@
 package com.jun.controller;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jun.domain.MovBoardVO;
 import com.jun.domain.PageMaker;
 import com.jun.domain.SearchCriteria;
+import com.jun.service.CommentServiceImpl;
 import com.jun.service.MovBoardServiceImpl;
 
 import org.slf4j.Logger;
@@ -23,6 +26,9 @@ public class MovBoardController {
 	
 	@Autowired(required=false)
 	private MovBoardServiceImpl service;
+	
+	@Inject
+	private CommentServiceImpl cservice;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MovBoardController.class);
 
@@ -37,7 +43,7 @@ public class MovBoardController {
 		model.addAttribute("rank", service.rankList());  // 랭킹 노출
 		model.addAttribute("top", service.readTop()); // top 가져오기
 		model.addAttribute("mid", service.readMid()); // mid 가져오기
-		model.addAttribute("board", service.readBoard(cri)); // 게시판 글 가져오기
+//		model.addAttribute("comment", cservice.getComment(cri));
 		model.addAttribute("pageMaker", pageMaker); // 게시판 글 페이징 객체
 		return "/mov/board";
 	}

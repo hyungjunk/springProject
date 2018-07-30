@@ -37,9 +37,9 @@
 		SELECT name, imgpath FROM movBoard where genre = #{genre} order by viewcnt desc LIMIT 0, 10
 	</select>
 	
-	<select id="readBoard" resultType="com.jun.domain.EngBoardVO">
+<!-- 	<select id="readBoard" resultType="com.jun.domain.EngBoardVO">
 		SELECT * FROM engBoard order by updatedate desc LIMIT #{pageStart}, #{perPageNum}
-	</select>
+	</select> -->
 	
 	<select id="countPost" resultType="int">
 		SELECT count(*) FROM engBoard 

@@ -355,8 +355,8 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 						</script>
 						</div>
 						<div class="row">
-						<div id="movieComments" class="col-8 bg-light">
-							<h5>Comment <strong> [ ]</strong></h5>
+						<div id="movieReply" class="col-8 bg-light">
+							<h5>Reply <strong> [ ]</strong></h5>
 							<div class="input-group">
 							  <input type="hidden" id="mid" value="">
 							  <input type="text" id="uname" class="form-control">
@@ -365,8 +365,8 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 							    <button class="btn btn-default" type="button" onclick="addReply()">Go!</button>
 							  </span>
 							</div>
-							<div id="movieComment">
-							<script id="commentModal" type="text/x-handlebars-template">
+							<div id="movieReply">
+							<script id="replyModal" type="text/x-handlebars-template">
 						    {{#each .}}
 						     <li class="replyLi">
 					    	{{uname}} ::: {{utext}}
@@ -391,7 +391,7 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 </body>
 <script>
 var infoTemplate = $("#movieModal").html();
-var commentTemplate = $("#commentModal").html();
+var replyTemplate = $("#replyModal").html();
 
 function getMovieInfo(mid) {
 	console.log("movieinfo called");
@@ -403,7 +403,7 @@ function getMovieInfo(mid) {
 			$("#imgpathInnerBig").attr("src", data.imgpathInnerBig);
 			var template = Handlebars.compile(infoTemplate);
 			$("#movieContent").html(template(data));
-			getComments(mid);
+			getReply(mid);
 		},
 		error : function(data) {
 			alert("영화 정보를 가져오는데 오류가 발생했습니다.");
@@ -412,8 +412,8 @@ function getMovieInfo(mid) {
 	});
 };
 
-function getComments(mid) {
-	console.log("comments called");
+function getReply(mid) {
+	console.log("replys called");
 	console.log(mid);
 	$("#mid").val(mid);
 	$.ajax({
@@ -421,8 +421,8 @@ function getComments(mid) {
 		url : "/mov/reply/" + mid,
 		data : "application/json",
 		success : function(data) {
-			var template = Handlebars.compile(commentTemplate);
-			$("#movieComment").html(template(data));
+			var template = Handlebars.compile(replyTemplate);
+			$("#movieReply").html(template(data));
 		},
 		error : function(data) {
 			alert("댓글 목록을 가져오는 중에 오류가 발생했습니다.");
@@ -448,7 +448,7 @@ function addReply() {
 		}),
 		success : function(data) {
 			alert("등록 완료");
-			getComments(mid);
+			getReply(mid);
 		},
 		error : function(data) {
 			alert("댓글을 등록하는 중에 오류가 발생했습니다.");

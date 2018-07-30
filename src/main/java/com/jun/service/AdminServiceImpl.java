@@ -1,18 +1,14 @@
 package com.jun.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jun.domain.Criteria;
 import com.jun.domain.MovBoardVO;
 import com.jun.persistence.AdminDAO;
-import com.jun.util.FileUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +18,6 @@ public class AdminServiceImpl implements AdminService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 
-	@Autowired(required=false)
-	private FileUtil fileUtils;
-	
 	@Inject
 	private AdminDAO dao;
 	
