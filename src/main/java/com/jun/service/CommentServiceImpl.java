@@ -25,4 +25,14 @@ public class CommentServiceImpl implements CommentService {
 		return dao.getComment(cri);
 	}
 
+	@Override
+	public void updateComment(CommentVO vo) throws Exception {
+		dao.updateComment(vo);
+	}
+
+	@Override
+	public void deleteComment(int cid) throws Exception {
+		dao.deleteComment(cid);
+	}
+	
 }

@@ -213,21 +213,15 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 		<br>
 		<div class="row">
 			<div class="col-3">
-				<p class="text-center">장르별 탐색</p>
+				<p class="text-center"><strong>장르별 탐색</strong></p>
 				<hr>
 				<div class="list-group">
-					<a href="/mov/recommendation?genre=thrill"
-						class="list-group-item list-group-item-action">스릴러</a> <a
-						href="/mov/recommendation?genre=drama"
-						class="list-group-item list-group-item-action">드라마</a> <a
-						href="/mov/recommendation?genre=romance"
-						class="list-group-item list-group-item-action">로맨스</a> <a
-						href="/mov/recommendation?genre=action"
-						class="list-group-item list-group-item-action">액션</a> <a
-						href="/mov/recommendation?genre=horror"
-						class="list-group-item list-group-item-action">호러</a> <a
-						href="/mov/recommendation?genre=adult"
-						class="list-group-item list-group-item-action">성인</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=thrill', '_blank')">스릴러</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=drama', '_blank')">드라마</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=romance', '_blank')">로맨스</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=action', '_blank')">액션</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=horror', '_blank')">호러</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=adult', '_blank')">성인</a>
 				</div>
 			</div>
 			<div class="col-9">
@@ -303,7 +297,7 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 			<hr>
 		</div>
 		<div class="row" style="height: 300px">
-		<%@ include file="freeboard.jsp" %>
+		<%@ include file="commentSection.jsp" %>
 		</div>
 	</div>
 	<div id="Content" class="modal fade" role="dialog">

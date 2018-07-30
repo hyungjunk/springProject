@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jun.domain.Criteria;
 import com.jun.domain.MovBoardVO;
 import com.jun.domain.PageMaker;
-import com.jun.domain.SearchCriteria;
 import com.jun.service.CommentServiceImpl;
 import com.jun.service.MovBoardServiceImpl;
 
@@ -35,15 +35,14 @@ public class MovBoardController {
 	@RequestMapping(value = "board", method = RequestMethod.GET)
 	public String showMovieBoard(
 			Model model
-			, SearchCriteria cri) throws Exception {
-		logger.info("/mov/board");
+			, Criteria cri) throws Exception {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
+		logger.info(cri.toString());
 		pageMaker.setTotalCount(service.countPost());
 		model.addAttribute("rank", service.rankList());  // 랭킹 노출
 		model.addAttribute("top", service.readTop()); // top 가져오기
 		model.addAttribute("mid", service.readMid()); // mid 가져오기
-//		model.addAttribute("comment", cservice.getComment(cri));
 		model.addAttribute("pageMaker", pageMaker); // 게시판 글 페이징 객체
 		return "/mov/board";
 	}

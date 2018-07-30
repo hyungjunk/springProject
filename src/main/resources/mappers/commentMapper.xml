@@ -6,11 +6,19 @@
 <mapper namespace="commentDAO">
 
 	<insert id="addComment">
-		INSERT INTO tbl_comment(uid, ucomment) VALUES(#{uid}, #{ucomment})
+		INSERT INTO comment(uid, ucomment) VALUES(#{uid}, #{ucomment})
 	</insert>
 	
 	<select id="getComment" resultType="com.jun.domain.CommentVO">
-		SELECT * FROM comment where cid > 0
+		SELECT * FROM comment where cid > 0 ORDER BY regdate desc LIMIT #{pageStart}, #{perPageNum} 
 	</select>
+
+	<update id="updateComment">
+		UPDATE comment SET uid = #{uid}, ucomment = #{ucomment} WHERE cid = #{cid} 
+	</update>
+
+	<delete id="deleteComment">
+		DELETE FROM comment WHERE cid = #{cid}
+	</delete>
 
 </mapper>
