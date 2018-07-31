@@ -12,6 +12,10 @@
 	<select id="getComment" resultType="com.jun.domain.CommentVO">
 		SELECT * FROM comment where cid > 0 ORDER BY regdate desc LIMIT #{pageStart}, #{perPageNum} 
 	</select>
+	
+	<select id="getCommentCount" resultType="int">
+		SELECT count(*) FROM comment
+	</select>
 
 	<update id="updateComment">
 		UPDATE comment SET uid = #{uid}, ucomment = #{ucomment} WHERE cid = #{cid} 

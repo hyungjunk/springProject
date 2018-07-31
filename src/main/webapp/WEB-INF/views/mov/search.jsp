@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Recommendations</title>
+<title>Find your taste!</title>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 body {
@@ -84,20 +84,12 @@ body {
 .inner-small-cut img{
 	width:100%;
 }
-/* .row{
-    overflow: hidden; 
-}
-
-[class*="col-"]{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
 </style>
 </head>
 <body class="bg-light" style="height:1000px">
 
 <div class="container">
-<div class="row">Recommended lists</div><br>
+<div class="row"><h3>Recommended lists</h3></div><br>
 <div class="row">
 	<div class="card-deck">
 	<c:forEach var="list" items="${list}" varStatus="status" end="4">
@@ -111,8 +103,48 @@ body {
 	</div>
 <br>
 </div>
+
+	<div>
+		<div class="input-group">
+			<select name="searchType">
+				<option value="nc" <c:out value="${cri.searchType == null?'selected':''}"/>>All</option>
+				<option value="n" <c:out value="${cri.searchType eq 'n'?'selected':''}"/>>Name</option>
+				<option value="c" <c:out value="${cri.searchType eq 'c'?'selected':'' }"/>>Content</option>
+			</select>
+		   <input id="keyword" type="text">
+		   <span class="input-group-btn">
+		        <button id="searchBtn" class="btn btn-default" type="button">Go!</button>
+		   </span>
+		</div>
+	</div>
+	<br>
+	<nav>
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item ${pageMaker.startPage==1?'disabled':'' }"/>
+	      <a class="page-link">Previous</a>
+	    </li>
+		    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="page">
+				<li data-page="paging" class="page-item">
+				<a class="page-link" href="/mov/search${pageMaker.makeSearch(page)}&genre=${genre}"> ${page}</a>
+				</li>
+			</c:forEach>
+	    <li class="page-item ${pageMaker.endPage==pageMaker.startPage+4?'':'disabled'}">
+	      <a class="page-link">Next</a>
+	    </li>
+	  </ul>
+	</nav>
+	
+
 </div>
 </body>
 <script>
+$("#searchBtn").on("click", function(){
+	self.location = "/mov/search"
+	+ "${pageMaker.pageBuilder(1)}"
+	+ "&keyword=" + $('#keyword').val()
+	+ "&searchType=" + $("select option:selected").val()
+	+ "&genre=" + "${genre}"
+});
+
 </script>
 </html>

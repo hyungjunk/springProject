@@ -15,16 +15,16 @@ td {
 
 <ul id="comments" class="list-group">
 <script id="commentTemplate" type="text/x-handlebars-template">
-	{{#each .}}
+	{{#each list}}
 	  <li class="list-group-item d-flex justify-content-between align-items-center">
 		  <div class="row w-100">
+			<input type="hidden" value={{cid}}>
 		  	<div class="col-2" name="uid">{{uid}}</div>
-		  	<div class="col-8" name="ucomment">{{ucomment}}</div>
+		  	<div class="col-8" name="ucomment" role="ucomment">{{ucomment}}</div>
 		  	<div class="col-2" name="regdate">{{prettifyDate regdate}}</div>
 		  </div>
 			<button type="button" class="btn" onclick="modifyComment()">Modify</button> 
 			<button type="button" class="btn" onclick="deleteComment()">Delete</button> 
-	    <span class="badge badge-primary badge-pill">14</span>
 	  </li>
 	{{/each }}
 </script>
@@ -32,27 +32,14 @@ td {
 
 <div class="input-group">
 	<button id="openForm" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>&nbsp;
-	<button id="golist" type="button" class="btn btn-success">List</button>
 </div>
 
 <nav>
-  <ul class="pagination justify-content-center">
-    <li class="page-item ${pageMaker.startPage==1?'disabled':'' }"/>
-      <a class="page-link">Previous</a>
-    </li>
-    <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="page">
-		<li data-page="paging" class="page-item">
-		<a class="page-link" onclick="getCommentPage(${page})"> ${page}</a>
-		</li>
-	</c:forEach>
-    <li class="page-item ${pageMaker.endPage==pageMaker.startPage+4?'':'disabled'}">
-      <a class="page-link">Next</a>
-    </li>
-  </ul>
+	<ul id="pagination" class="pagination justify-content-center">
+	</ul>
 </nav>
 
 <div id="openNew" class="collapse bg-light">
-	<!-- <form id="addForm" action="/mov/comment/post" method="POST"> -->
 		<div class="form-group">
 			<input id="cid" type="hidden">
 	  		<label for="name">Name</label>
@@ -62,7 +49,6 @@ td {
 			<label for="reply">Your comment</label>
 			<input id="ucomment" name="ucomment" class="form-control" type="text" style="width:50%">
 		</div>
-	<!-- </form> -->
 	<button id="sendForm" type="submit" class="btn btn-info" onclick="addComment()">Send</button>
 	<button id="cancel" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#openNew">Cancel</button>
 </div>
@@ -107,7 +93,12 @@ function addComment(){
 	})
 }
 
-/* 코멘트 수정 */
+function modifyComment(){
+	console.log($(this).length);
+}
+
+
+/* 코멘트 수정 
 function modifyComment(cid){
 	console.log(page);
 	var cid = 1;
@@ -134,7 +125,10 @@ function modifyComment(cid){
 			alert("서버로부터 응답이 없습니다.");
 		}
 	})
-};
+};*/
+
+
+
 /* 코멘트 삭제 */
 function deleteComment(){
 	console.log(page);
@@ -168,6 +162,25 @@ function getCommentPage(page){
 		$("#comments").html(template(data));
 	})
 };
+
+getPageList(1);
+function getPageList(page){
+	$.getJSON("/mov/comment/"+page, function(data){
+		var pageMaker = data.pageMaker;
+		var str="";
+		if (pageMaker.prev){
+			str += "<li><a class='page-link' onclick='getCommentPage(pageMaker.startPage-1)'><< </a></li>'";
+		}
+		for (var i=pageMaker.startPage, len=pageMaker.endPage; i<= len; i++){
+			var strClass = "class=page-item" + pageMaker.cri.page==i?'active':'';
+			str += "<li "+strClass+"><a class='page-link' onclick='getCommentPage("+i+")'>"+i+"</a></li>";
+		}
+		if (pageMaker.next){
+			str += "<li><a href='/mov/comment/'"+(pageMaker.endPage+1)+"'><< </a></li>'";
+		}
+		$("#pagination").html(str);
+	})
+}
 
 $("li[data-page]").on("click", function(){
 	$("li[data-page]").removeClass("active");

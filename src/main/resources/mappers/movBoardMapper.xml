@@ -18,15 +18,19 @@
 	</update>
 	
 	<select id="readTop" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, imgpath FROM movBoard order by viewcnt desc LIMIT 0, 3 
+		SELECT mid, name, contents, runtime, viewcnt, imgpath, imgpathInnerSmall FROM movBoard order by viewcnt desc LIMIT 0, 3 
 	</select>
 	
 	<select id="readMid" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, imgpath FROM movBoard order by viewcnt desc LIMIT 4, 6 
+		SELECT mid, name, contents, runtime, viewcnt, imgpath, imgpathInnerSmall FROM movBoard order by viewcnt desc LIMIT 4, 9 
 	</select>
 	
 	<select id="readAll" resultType="com.jun.domain.MovBoardVO">
 		SELECT * FROM movBoard order by regdate desc LIMIT 0, 5
+	</select>
+	
+	<select id="countPost" resultType="int">
+		SELECT count(*) FROM movBoard
 	</select>
 	
 	<select id="rankList" resultType="com.jun.domain.MovBoardVO">
@@ -34,11 +38,36 @@
 	</select>
 	
 	<select id="genreList" resultType="com.jun.domain.MovBoardVO">
-		SELECT name, imgpath FROM movBoard where genre = #{genre} order by viewcnt desc LIMIT 0, 10
+		<![CDATA[
+		SELECT name, imgpath FROM movBoard where genre = #{genre}
+		]]>
+		<include refid="search"/>
+		<![CDATA[
+		 order by viewcnt desc LIMIT #{pageStart}, #{perPageNum}
+		 ]]>
 	</select>
 	
-	<select id="countPost" resultType="int">
-		SELECT count(*) FROM comment
+	<select id="totalCountPerGenre" resultType="int">
+		<![CDATA[
+		SELECT count(*) FROM movBoard where genre = #{genre}
+		]]>
+		<include refid="search"/>
 	</select>
+	
+	
+	<!-- 검색조건 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test = "searchType == 'nc'.toString()">
+				AND (name LIKE CONCAT("%", #{keyword}, "%") OR contents LIKE CONCAT("%", #{keyword}, "%"))
+			</if>
+			<if test = "searchType == 'n'.toString()">
+				AND name LIKE CONCAT("%", #{keyword}, "%")
+			</if>
+			<if test = "searchType == 'g'.toString()">
+				AND contents LIKE CONCAT("%", #{keyword}, "%")
+			</if>
+		</if>
+	</sql>
 	
 </mapper>

@@ -38,10 +38,8 @@ public class AdminController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.totalCount());
-		System.out.println(service.totalCount());
 		model.addAttribute("list", service.readAll(cri));
 		model.addAttribute("pageMaker", pageMaker);
-		System.out.println(pageMaker+"=========================================");
 		return "/admin/main"; 
 	}
 
@@ -54,15 +52,14 @@ public class AdminController {
 	// 公厚 牧刨明 积己 咀记
 	@RequestMapping(value = "/mov/create", method = RequestMethod.POST)
 	public String addContent(
-			MovBoardVO movBoardVO
+			@ModelAttribute MovBoardVO vo
 			, Criteria cri
 			, Model model
 			, RedirectAttributes rttr) throws Exception {
-		logger.info("==============================================================");
-		logger.info(movBoardVO.toString());
-		service.create(movBoardVO);
-		model.addAttribute("list", service.readAll(cri));
-		rttr.addFlashAttribute("msg", "success");
+		logger.info(vo.toString());
+		service.create(vo);
+//		model.addAttribute("list", service.readAll(cri));
+//		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/admin";
 	}
 	
@@ -74,7 +71,6 @@ public class AdminController {
 			, Model model
 			, RedirectAttributes rttr
 			) throws Exception {
-		logger.info("admin/edit/{mid}, GET");
 		model.addAttribute("list", service.read(mid));
 		return "/admin/Mov/MovDetail";
 	}
@@ -87,9 +83,7 @@ public class AdminController {
 			, Model model
 			, RedirectAttributes rttr
 			) throws Exception {
-		logger.info(vo.toString()+"===============================");
 		service.update(vo);
-		System.out.println("error");
 		rttr.addFlashAttribute("msg", "success");
 		return "redirect:/admin";
 	}

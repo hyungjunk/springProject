@@ -105,21 +105,12 @@ body {
 .inner-small-cut img {
 	width: 100%;
 }
-/* .row{
-    overflow: hidden; 
-}
-
-[class*="col-"]{
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
-} */
 </style>
 </head>
 <body class="bg-light" style="height: 1000px">
 
-	<div class="col bg-dark text-white"
-		style="width: 100%; padding-left: 0px; overflow: hidden">
-		<img src="https://dummyimage.com/2000x250/078736/fff.png">
+	<div class="col bg-dark text-white"	style="width: 100%; height:300px; padding: 0px; overflow: hidden">
+		<img style="width:100%; padding:0px" src="https://coverfiles.alphacoders.com/460/46067.jpg">
 		<div class="card-img-overlay">
 			<h5 class="card-title">Card title</h5>
 			<p class="card-text">This is a wider card with supporting text
@@ -131,6 +122,7 @@ body {
 
 	<div class="container">
 		<!-- Movie Curation Text Header -->
+		<br><br>
 		<div class="row">
 			<p>	<h3>What's going on?</h3> </p>
 		</div> <br>
@@ -146,12 +138,12 @@ body {
 		 -->
 		<div class="row">
 			<div class="col-3">
-				<div class="card bg-light">
-					<h5>현재 랭킹 순위</h5>
+				<div class="card bg-light" style="border:none; height:100%">
+					<h5 class="text-center">현재 랭킹 순위</h5>
 					<br>
 					<div class="list-group">
 						<c:forEach items="${rank}" var="movBoardVO" varStatus="status">
-							<li class="list-group-item list-group-item-action">
+							<li class="list-group-item list-group-item-action" style="border:none; color:white; background-color:red">
 							${status.count}. ${movBoardVO.name}</li>
 						</c:forEach>
 					</div>
@@ -175,7 +167,7 @@ body {
 				<div class="box">
 					<div class="imgBox" data-toggle="modal" data-target="#Content"
 						onclick="getMovieInfo(${top[1].mid})">
-						<img class="card" src="${top[1].imgpath}">
+						<img class="card" src="${top[1].imgpathInnerSmall}">
 						<div class="content">
 							<div class="description" style="background-color: white">
 								<h5 class="text-center align-middle">
@@ -190,7 +182,7 @@ body {
 				<div class="box">
 					<div class="imgBox" data-toggle="modal" data-target="#Content"
 						onclick="getMovieInfo(${top[2].mid})">
-						<img class="card" src="${top[2].imgpath}">
+						<img class="card" src="${top[2].imgpathInnerSmall}">
 						<div class="content">
 							<div class="description" style="background-color: white">
 								<h5 class="text-center">
@@ -216,63 +208,54 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 				<p class="text-center"><strong>장르별 탐색</strong></p>
 				<hr>
 				<div class="list-group">
-					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=thrill', '_blank')">스릴러</a>
-					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=drama', '_blank')">드라마</a>
-					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=romance', '_blank')">로맨스</a>
-					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=action', '_blank')">액션</a>
-					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=horror', '_blank')">호러</a>
-					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/recommendation?genre=adult', '_blank')">성인</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/search?genre=thrill', '_blank')">스릴러</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/search?genre=drama', '_blank')">드라마</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/search?genre=romance', '_blank')">로맨스</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/search?genre=action', '_blank')">액션</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/search?genre=horror', '_blank')">호러</a>
+					<a class="list-group-item list-group-item-action" style="cursor:pointer" onclick="javascript:window.open('/mov/search?genre=adult', '_blank')">성인</a>
 				</div>
 			</div>
 			<div class="col-9">
 				<div class="row bg-dark">
-					<div id="carouselExampleControls" class="carousel slide"
-						data-interval="3000" data-ride="carousel">
+					<div id="carouselExampleControls" class="carousel slide" data-interval="3000" data-ride="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">
 								<div class="row bg-light justify-content-center">
 									<div class="col-4">
-										<img class="d-block"
-											src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1531362451/faj2bznbcurkzeo6u7hc.jpg"
-											alt="First slide">
+										<img class="d-block" src="${mid[0].imgpathInnerSmall}" alt="movieCard">
 									</div>
 									<div class="col-4">
-										<img class="d-block"
-											src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1531362451/faj2bznbcurkzeo6u7hc.jpg"
-											alt="First slide">
+										<img class="d-block" src="${mid[1].imgpathInnerSmall}" alt="movieCard">
 									</div>
 									<div class="col-4">
-										<img class="d-block"
-											src="https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_400,q_80,w_280/v1531362451/faj2bznbcurkzeo6u7hc.jpg"
-											alt="First slide">
+										<img class="d-block" src="${mid[2].imgpathInnerSmall}" alt="movieCard">
 									</div>
 								</div>
 							</div>
 							<div class="carousel-item">
 								<div class="row bg-light justify-content-center">
-									<div class="col-6">
-										<img class="d-block"
-											src="https://dummyimage.com/650x400/083236/fff.png"
-											alt="Second slide">
+									<div class="col-4">
+										<img class="d-block" src="${mid[3].imgpathInnerSmall}" alt="movieCard">
 									</div>
-									<div class="col-6">
-										<img class="d-block"
-											src="https://dummyimage.com/650x400/083236/fff.png"
-											alt="Second slide">
+									<div class="col-4">
+										<img class="d-block" src="${mid[4].imgpathInnerSmall}" alt="movieCard">
+									</div>
+									<div class="col-4">
+										<img class="d-block" src="${mid[5].imgpathInnerSmall}" alt="movieCard">
 									</div>
 								</div>
 							</div>
 							<div class="carousel-item">
-								<div class="row">
-									<div class="col-6">
-										<img class="d-block"
-											src="https://dummyimage.com/650x400/083236/fff.png"
-											alt="Second slide">
+								<div class="row bg-light justify-content-center">
+									<div class="col-4">
+										<img class="d-block" src="${mid[6].imgpathInnerSmall}" alt="movieCard">
 									</div>
-									<div class="col-6">
-										<img class="d-block"
-											src="https://dummyimage.com/650x400/083236/fff.png"
-											alt="Second slide">
+									<div class="col-4">
+										<img class="d-block" src="${mid[7].imgpathInnerSmall}" alt="movieCard">
+									</div>
+									<div class="col-4">
+										<img class="d-block" src="${mid[8].imgpathInnerSmall}" alt="movieCard">
 									</div>
 								</div>
 							</div>
@@ -293,7 +276,7 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 
 		<br>
 		<div class="row">
-			<h3>Comments</h3>
+			<h3>Comments [ ]</h3>
 			<hr>
 		</div>
 		<div class="row" style="height: 300px">
@@ -349,7 +332,7 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 						</script>
 						</div>
 						<div class="row">
-						<div id="movieReply" class="col-8 bg-light">
+						<div id="movieReplyInput" class="col-8 bg-light">
 							<h5>Reply <strong> [ ]</strong></h5>
 							<div class="input-group">
 							  <input type="hidden" id="mid" value="">
@@ -388,7 +371,6 @@ var infoTemplate = $("#movieModal").html();
 var replyTemplate = $("#replyModal").html();
 
 function getMovieInfo(mid) {
-	console.log("movieinfo called");
 	$.ajax({
 		type : "get",
 		url : "/mov/board/detail/" + mid,
@@ -407,8 +389,6 @@ function getMovieInfo(mid) {
 };
 
 function getReply(mid) {
-	console.log("replys called");
-	console.log(mid);
 	$("#mid").val(mid);
 	$.ajax({
 		type : "get",

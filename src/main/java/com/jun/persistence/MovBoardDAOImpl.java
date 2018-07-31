@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.jun.domain.MovBoardVO;
+import com.jun.domain.SearchCriteria;
 
 @Repository
 public class MovBoardDAOImpl implements MovBoardDAO {
@@ -53,8 +54,13 @@ public class MovBoardDAOImpl implements MovBoardDAO {
 	}
 
 	@Override
-	public List<MovBoardVO> genreList(String genre) throws Exception {
-		return session.selectList(namespace+".genreList", genre);
+	public List<MovBoardVO> genreList(SearchCriteria cri) throws Exception {
+		return session.selectList(namespace+".genreList", cri);
+	}
+	
+	@Override
+	public int totalCountPerGenre(SearchCriteria cri) throws Exception {
+		return session.selectOne(namespace+".totalCountPerGenre", cri);
 	}
 
 	@Override

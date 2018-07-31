@@ -6,15 +6,26 @@
 <mapper namespace="adminMapper">
 
 	<insert id="create">
-		INSERT INTO movBoard (name, contents, runtime, imgpath) VALUES (#{name}, #{contents}, #{runtime}, #{imgpath}) 
+		INSERT INTO movBoard 
+		(name, tier, contents, runtime, imgpath, genre, imgpathInnerBig, imgpathInnerSmall) 
+		VALUES 
+		(#{name}, #{tier}, #{contents}, #{runtime}, #{imgpath}, #{genre}, #{imgpathInnerBig}, #{imgpathInnerSmall}) 
 	</insert>
 	
 	<select id="read" resultType="com.jun.domain.MovBoardVO">
-		SELECT mid, name, contents, runtime, viewcnt, regdate, updatedate, imgpath FROM movBoard where mid = #{mid}
+		SELECT * FROM movBoard where mid = #{mid}
 	</select>
 	
 	<update id="update">
-		UPDATE movBoard SET name = #{name}, contents = #{contents}, runtime = #{runtime}, imgpath = #{imgpath} where mid=#{mid}
+		UPDATE movBoard SET 
+		name = #{name}
+		, contents = #{contents}
+		, runtime = #{runtime}
+		, genre = #{genre} 
+		, imgpath = #{imgpath} 
+		, imgpathInnerBig = #{imgpathInnerBig} 
+		, imgpathInnerSmall = #{imgpathInnerSmall} 
+		WHERE mid=#{mid}
 	</update>
 	
 	<select id="readAll" resultType="com.jun.domain.MovBoardVO">
@@ -28,9 +39,5 @@
 	<delete id="delete">
 		DELETE from movBoard where mid = #{mid}
 	</delete>
-	
-	<insert id="addAttach">
-		insert into tb_file(fullName, bno) values (#{fullName}, LAST_INSERT_ID())
-	</insert>
 
 </mapper>

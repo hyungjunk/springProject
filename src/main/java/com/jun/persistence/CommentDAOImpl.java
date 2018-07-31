@@ -1,6 +1,8 @@
 package com.jun.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -29,6 +31,11 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
+	public int getCommentCount() throws Exception {
+		return session.selectOne(namespace+".getCommentCount");
+	}
+	
+	@Override
 	public void updateComment(CommentVO vo) throws Exception {
 		session.update(namespace+".updateComment", vo);
 	}
@@ -38,5 +45,7 @@ public class CommentDAOImpl implements CommentDAO {
 		System.out.println(cid+"===================================cid==================");
 		session.update(namespace+".deleteComment", cid);
 	}
+
+
 	
 }

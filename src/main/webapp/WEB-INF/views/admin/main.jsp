@@ -22,10 +22,9 @@ td {
 <body>
 <div class="container">
 <br>
-<a href="/admin/articles">article manager</a>
 <h3>컨텐츠 관리</h3>
 <hr>
-<span><button type="button" onclick="self.location='/admin/mov/create'">컨텐츠 등록하기</button></span>
+<span><button type="button" class="btn float-right" onclick="self.location='/admin/mov/create'">컨텐츠 등록하기</button></span>
 <table class="bg-light table" style="overflow:hidden">
 	<th class="text-center" style="width:5%">번호</th>
 	<th class="text-center" style="width:5%">영화명</th>

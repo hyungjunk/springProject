@@ -11,6 +11,8 @@ public interface CommentDAO {
 	
 	public List<CommentVO> getComment(Criteria cri) throws Exception;
 	
+	public int getCommentCount() throws Exception;
+	
 	public void updateComment(CommentVO vo) throws Exception;
 	
 	public void deleteComment(int cid) throws Exception;

@@ -21,7 +21,7 @@
 </div>
 <hr>
 <div class="form-group">
-	<form role="form" action="/admin/edit/${list.mid}" method="post">
+	<form id="movieForm" role="form" action="/admin/edit/${list.mid}" method="post">
 	  <div class="form-row">
 	    <div class="col-3">
 	      <label>영화명</label>
@@ -63,7 +63,39 @@
 	      <label>조회수</label>
 	    </div>
 	    <div class="col">
-	      <input type="text" name="viewcnt" class="form-control" value="${list.viewcnt}">
+	      <input type="text" name="viewcnt" class="form-control" readonly value="${list.viewcnt}">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="col-3">
+	      <label>장르</label>
+	    </div>
+	    <div class="col">
+	      <input type="text" name="genre" class="form-control" value="${list.genre}">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="col-3">
+	      <label>대표이미지 (540x795)</label>
+	    </div>
+	    <div class="col">
+	      <input type="text" name="imgpath" class="form-control" value="${list.imgpath}">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="col-3">
+	      <label>카드 내 대형 이미지(800x450)</label>
+	    </div>
+	    <div class="col">
+	      <input type="text" name="imgpathInnerBig" class="form-control" value="${list.imgpathInnerBig}">
+	    </div>
+	  </div>
+	  <div class="form-row">
+	    <div class="col-3">
+	      <label>카드 내 소형 이미지 (160x230)</label>
+	    </div>
+	    <div class="col">
+	      <input type="text" name="imgpathInnerSmall" class="form-control" value="${list.imgpathInnerSmall}">
 	    </div>
 	  </div>
 	  </form>
@@ -73,7 +105,7 @@
 	    </div>
 	    <div class="col">
 	      <fmt:formatDate var="updatedate" pattern="yyyy-MM-dd KK:mm:ss" value="${list.updatedate}"/>
-	      <input id="updatedate" type="text" name="updatedate" class="form-control" value="${updatedate}">
+	      <input id="updatedate" type="text" name="updatedate" class="form-control" readonly value="${updatedate}">
 	    </div>
 	  </div>
 	  <div class="form-row">
@@ -82,56 +114,23 @@
 	    </div>
 	    <div class="col">
 	      <fmt:formatDate var="regdate" pattern="yyyy-MM-dd KK:mm:ss" value="${list.updatedate}"/>
-	      <input id="regdate" type="text" name="regdate" class="form-control" value="${regdate}">
+	      <input id="regdate" type="text" name="regdate" class="form-control" readonly value="${regdate}">
 	    </div>
 	  </div>
 	<button id="submitBtn" type="submit" class="btn btn-info" >Submit</button>
-	<button type="button" class="btn btn-info" onclick="history.back(-1)">Go Back</button>
+	<button type="button" class="btn btn-info" onclick="javascript:self.location='/admin'">List</button>
 </div>
 <hr>
-<h3>댓글</h3>
-<div class="form-group">
-<ul id="replies">
-<script id="template" type="text/x-handlebars-template">
-<form>
-{{#each .}}
-	<input type="text" class="form-group" value="{{rid}}">
-	<input type="text" class="form-group" value="{{uname}}"> 
-	<input type="text" class="form-group" value="{{utext}}"> 
-{{/each }}
-</form>
-</script>
-</ul>
-</div>
-
 </div>
 </body>
 <script>
-getReplyList(mid);
-var mid = ${list.mid};
-function getReplyList(mid){
-	var mid = ${list.mid};
-	var str="";
-	$.ajax({
-		type : "get",
-		url : "/mov/reply/"+mid,
-		success : function(data){
-			var source = $("#template").html();
-			var template = Handlebars.compile(source);
-			$("#replies").html(template(data));
-		},
-		error : function(data) {
-			alert("error");
-		}
+$("#submitBtn").on("click", function(){
+	$.post("/admin/edit/"+${list.mid}, $("#movieForm").serialize())
+	.done(function(data){
+		console.log($("movieForm").serialize());
+		alert("완료되었습니다");
+		self.location="/admin";
 	});
-};
-
-var source = $("#template").html();
-var template = Handlebars.compile(source);
-$("#replies2").html(template());
-
-$("#submitBtn").click(function(){
-	$("form[role='form']").submit();
-});
+})
 </script>
 </html>

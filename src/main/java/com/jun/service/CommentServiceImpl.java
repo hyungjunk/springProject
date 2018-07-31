@@ -24,6 +24,11 @@ public class CommentServiceImpl implements CommentService {
 	public List<CommentVO> getComment(Criteria cri) throws Exception {
 		return dao.getComment(cri);
 	}
+	
+	@Override
+	public int getCommentCount() throws Exception {
+		return dao.getCommentCount();
+	}
 
 	@Override
 	public void updateComment(CommentVO vo) throws Exception {
@@ -34,5 +39,5 @@ public class CommentServiceImpl implements CommentService {
 	public void deleteComment(int cid) throws Exception {
 		dao.deleteComment(cid);
 	}
-	
+
 }

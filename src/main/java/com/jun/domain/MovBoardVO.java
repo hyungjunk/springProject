@@ -12,6 +12,7 @@ public class MovBoardVO {
 	private Date updatedate;
 	private int viewcnt;
 	private String tier;
+	private String genre;
 	private String imgpath;
 	private String imgpathInnerBig;
 	private String imgpathInnerSmall;
@@ -95,7 +96,13 @@ public class MovBoardVO {
 	public void setImgpathInnerSmall(String imgpathInnerSmall) {
 		this.imgpathInnerSmall = imgpathInnerSmall;
 	}
-
+	
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 	@Override
 	public String toString() {
 		return "MovBoardVO [mid=" + mid + ", name=" + name + ", contents=" + contents + ", runtime=" + runtime

@@ -2,8 +2,17 @@ package com.jun.domain;
 
 public class SearchCriteria extends Criteria {
 	
+	private String genre;
 	private String searchType;
 	private String keyword;
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
 	public String getSearchType() {
 		return searchType;
@@ -23,6 +32,7 @@ public class SearchCriteria extends Criteria {
 
 	@Override
 	public String toString() {
-		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + "]";
+		return "SearchCriteria [genre=" + genre + ", searchType=" + searchType + ", keyword=" + keyword + "]";
 	}
+
 }
