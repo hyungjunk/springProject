@@ -57,6 +57,10 @@ td {
 </body>
 
 <script>
+
+getCommentPage(1);
+getPageList(1);
+
 /* 코멘트 등록 폼 노출 */
 $("#openForm").click(function() {
     $('html,body').animate({
@@ -86,6 +90,7 @@ function addComment(){
 		success: function(data){
 			alert("성공했습니다");
 			getCommentPage(1);
+			getPageList(1);
 		},
 		error: function(data){
 			alert("실패했습니다");
@@ -93,10 +98,11 @@ function addComment(){
 	})
 }
 
-function modifyComment(){
-	console.log($(this).length);
+function modifyComment(elem) {
+    var parent = $(elem).parent();
+    parent.find($("div[role='ucomment']")).css("background", "red");
+    console.log(parent);
 }
-
 
 /* 코멘트 수정 
 function modifyComment(cid){
@@ -131,7 +137,6 @@ function modifyComment(cid){
 
 /* 코멘트 삭제 */
 function deleteComment(){
-	console.log(page);
 	var cid = 1;
 	$.ajax({
 		type: "delete",
@@ -152,7 +157,6 @@ function deleteComment(){
 
 
 /* 코멘트 Read, 페이징 관련 */
-getCommentPage(1);
 var commentTemplate = $("#commentTemplate").html();
 function getCommentPage(page){
 	window.page = page;
@@ -163,7 +167,6 @@ function getCommentPage(page){
 	})
 };
 
-getPageList(1);
 function getPageList(page){
 	$.getJSON("/mov/comment/"+page, function(data){
 		var pageMaker = data.pageMaker;

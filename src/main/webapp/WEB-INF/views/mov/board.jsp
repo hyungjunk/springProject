@@ -112,11 +112,8 @@ body {
 	<div class="col bg-dark text-white"	style="width: 100%; height:300px; padding: 0px; overflow: hidden">
 		<img style="width:100%; padding:0px" src="https://coverfiles.alphacoders.com/460/46067.jpg">
 		<div class="card-img-overlay">
-			<h5 class="card-title">Card title</h5>
-			<p class="card-text">This is a wider card with supporting text
-				below as a natural lead-in to additional content. This content is a
-				little bit longer.</p>
-			<p class="card-text">Last updated 3 mins ago</p>
+			<h2 class="card-title">Welcome to CopCha</h2>
+			<p class="card-body">CopCha에 오신 것을 환영합니다</p>
 		</div>
 	</div>
 
@@ -184,8 +181,8 @@ body {
 						onclick="getMovieInfo(${top[2].mid})">
 						<img class="card" src="${top[2].imgpathInnerSmall}">
 						<div class="content">
-							<div class="description" style="background-color: white">
-								<h5 class="text-center">
+							<div class="description" style="background-color: white;">
+								<h3 class="text-center">
 									<strong>${top[2].name}</strong>
 									</h3>
 									<hr>
