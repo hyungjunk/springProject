@@ -39,7 +39,7 @@
 	
 	<select id="genreList" resultType="com.jun.domain.MovBoardVO">
 		<![CDATA[
-		SELECT name, imgpath FROM movBoard where genre = #{genre}
+		SELECT mid, name, imgpath FROM movBoard where genre = #{genre}
 		]]>
 		<include refid="search"/>
 		<![CDATA[

@@ -6,8 +6,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-This is main page <br><br>
-${result}
+Hello world <br>
+${login.uid} <br>
+${login.upw} <br>
+${login.uname} 
+<a href="/mov/board">Go to board</a>
 </body>
 </html>

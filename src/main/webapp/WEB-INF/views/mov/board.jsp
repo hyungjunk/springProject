@@ -6,14 +6,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Movie Board</title>
 <style>
@@ -112,8 +108,7 @@ body {
 	<div class="col bg-dark text-white"	style="width: 100%; height:300px; padding: 0px; overflow: hidden">
 		<img style="width:100%; padding:0px" src="https://coverfiles.alphacoders.com/460/46067.jpg">
 		<div class="card-img-overlay">
-			<h2 class="card-title">Welcome to CopCha</h2>
-			<p class="card-body">CopCha에 오신 것을 환영합니다</p>
+			<h2 class="card-title">CopCha에 오신 것을 환영합니다</h2>
 		</div>
 	</div>
 
@@ -154,7 +149,11 @@ body {
 							<div class="description" style="background-color: white">
 								<h3 class="text-center align-middle">${top[0].name}</h3>
 								<hr>
-								<p class="text-center">Hahaha</p>
+								<div class="row">
+									<div class="col-2"></div>
+									<div class="col-8 text-center">${top[0].name}</div>
+									<div class="col-2"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -171,7 +170,11 @@ body {
 									<strong>${top[1].name}</strong>
 								</h5>
 								<hr>
-								<p class="text-center">Hahaha</p>
+								<div class="row">
+									<div class="col-2"></div>
+									<div class="col-8 text-center">${top[1].name}</div>
+									<div class="col-2"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -182,11 +185,15 @@ body {
 						<img class="card" src="${top[2].imgpathInnerSmall}">
 						<div class="content">
 							<div class="description" style="background-color: white;">
-								<h3 class="text-center">
+								<h5 class="text-center">
 									<strong>${top[2].name}</strong>
-									</h3>
-									<hr>
-									<p class="text-center">Hahaha</p>
+								</h5>
+								<hr>
+								<div class="row">
+									<div class="col-2"></div>
+									<div class="col-8 text-center">${top[2].name}</div>
+									<div class="col-2"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -273,13 +280,15 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 
 		<br>
 		<div class="row">
-			<h3>Comments [ ]</h3>
+			<h3>Comments </h3>
 			<hr>
 		</div>
 		<div class="row" style="height: 300px">
 		<%@ include file="commentSection.jsp" %>
 		</div>
 	</div>
+	
+	<!-- MODAL BOX -->
 	<div id="Content" class="modal fade" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -287,9 +296,6 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 					<img style="width:100%" id="imgpathInnerBig">
 				    <button style="position:absolute; top:20px; right:20px;" type="button" class="close" data-dismiss="modal">&times;</button>
 			    </div>
-	<!-- 			<div class="modal-header inner-big-cut" style="background-image: url(https://dhgywazgeek0d.cloudfront.net/watcha/image/upload/c_fill,h_720,q_80,w_1280/v1531460398/dcumd1ue3jplkhwaurja.jpg)">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div> -->
 				<div class="modal-body">
 					<div>
 						<div class="row" style="color: black">
@@ -330,13 +336,13 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 						</div>
 						<div class="row">
 						<div id="movieReplyInput" class="col-8 bg-light">
-							<h5>Reply <strong> [ ]</strong></h5>
+							<h5>Reply</h5>
 							<div class="input-group">
-							  <input type="hidden" id="mid" value="">
-							  <input type="text" id="uname" class="form-control">
+							  <input type="hidden" id="mid">
+							  <input type="text" id="uname" class="form-control" value="${login.uid}" readonly>
 							  <input type="text" id="utext" class="form-control">
 							  <span class="input-group-btn">
-							    <button class="btn btn-default" type="button" onclick="addReply()">Go!</button>
+							    <button class="btn btn-default" type="button" onclick="addReply('${login.uid}')">Go!</button>
 							  </span>
 							</div>
 							<div id="movieReply">
@@ -350,8 +356,7 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 							</div>
 						</div>
 						<div class="col-4">
-							유튜브 임베드<br>
-							여기에 또 Modal 넣어서 유튜브 영상 뜨도록~~~
+							Youtube Embed<br>
 						</div>
 						</div>
 					</div>
@@ -401,10 +406,10 @@ function getReply(mid) {
 	});
 };
 
-function addReply() {
+function addReply(uname) {
 	console.log("add reply called");
 	var mid = $("#mid").val();
-	var uname = $("#uname").val();
+	var uname = uname;
 	var utext = $("#utext").val();
 	$.ajax({
 		type : "POST",

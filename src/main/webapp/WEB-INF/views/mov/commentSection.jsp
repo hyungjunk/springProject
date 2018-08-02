@@ -12,32 +12,42 @@ td {
 <body>
 <div class="container">
 <br>
-
+<form>
+	<div class="form-group row">
+		<input id="cid" type="hidden">
+		<input type="text" id="uid" name="uid" class="form-control-plaintext col-2 text-center" value="${login.uid}" readonly>
+		<input type="text" id="ucomment" name="ucomment" class="form-control col-9">
+		<button type="button" class="btn btn-small col-1 pull-right" onclick="addComment()">Post</button>
+	</div>
+</form>
 <ul id="comments" class="list-group">
 <script id="commentTemplate" type="text/x-handlebars-template">
 	{{#each list}}
 	  <li class="list-group-item d-flex justify-content-between align-items-center">
 		  <div class="row w-100">
 			<input type="hidden" value={{cid}}>
-		  	<div class="col-2" name="uid">{{uid}}</div>
+		  	<div class="col-2" name="uid"> {{uid}} </div>
 		  	<div class="col-8" name="ucomment" role="ucomment">{{ucomment}}</div>
-		  	<div class="col-2" name="regdate">{{prettifyDate regdate}}</div>
+		  	<div class="col-2 text-center" name="regdate">{{prettifyDate regdate}}</div>
 		  </div>
-			<button type="button" class="btn" onclick="modifyComment()">Modify</button> 
-			<button type="button" class="btn" onclick="deleteComment()">Delete</button> 
+			<!--<button type="button" class="btn btn-info btn-small" onclick="modifyComment()">Modify</button> 
+			<button type="button" class="btn btn-info btn-small" onclick="deleteComment()">Delete</button>-->
 	  </li>
 	{{/each }}
 </script>
 </ul>
 
-<div class="input-group">
-	<button id="openForm" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>&nbsp;
-</div>
-
 <nav>
 	<ul id="pagination" class="pagination justify-content-center">
 	</ul>
 </nav>
+</div>
+
+
+<!-- 
+<div class="input-group">
+	<button id="openForm" class="btn btn-info" data-toggle="collapse" data-target="#openNew">Add</button>&nbsp;
+</div>
 
 <div id="openNew" class="collapse bg-light">
 		<div class="form-group">
@@ -52,8 +62,8 @@ td {
 	<button id="sendForm" type="submit" class="btn btn-info" onclick="addComment()">Send</button>
 	<button id="cancel" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#openNew">Cancel</button>
 </div>
-<div class="bottom"></div>
-</div>
+<div class="bottom"></div> -->
+
 </body>
 
 <script>
@@ -89,6 +99,7 @@ function addComment(){
 		}),
 		success: function(data){
 			alert("성공했습니다");
+			$("#ucomment").val('');
 			getCommentPage(1);
 			getPageList(1);
 		},
@@ -98,13 +109,7 @@ function addComment(){
 	})
 }
 
-function modifyComment(elem) {
-    var parent = $(elem).parent();
-    parent.find($("div[role='ucomment']")).css("background", "red");
-    console.log(parent);
-}
-
-/* 코멘트 수정 
+/* 코멘트 수정 */
 function modifyComment(cid){
 	console.log(page);
 	var cid = 1;
@@ -131,7 +136,7 @@ function modifyComment(cid){
 			alert("서버로부터 응답이 없습니다.");
 		}
 	})
-};*/
+};
 
 
 
@@ -172,23 +177,18 @@ function getPageList(page){
 		var pageMaker = data.pageMaker;
 		var str="";
 		if (pageMaker.prev){
-			str += "<li><a class='page-link' onclick='getCommentPage(pageMaker.startPage-1)'><< </a></li>'";
+			str += "<li><a class='page-link' onclick='getCommentPage("+(pageMaker.startPage-1)+");getPageList("+(pageMaker.startPage-1)+")'> Next </a></li>";
 		}
 		for (var i=pageMaker.startPage, len=pageMaker.endPage; i<= len; i++){
 			var strClass = "class=page-item" + pageMaker.cri.page==i?'active':'';
 			str += "<li "+strClass+"><a class='page-link' onclick='getCommentPage("+i+")'>"+i+"</a></li>";
 		}
 		if (pageMaker.next){
-			str += "<li><a href='/mov/comment/'"+(pageMaker.endPage+1)+"'><< </a></li>'";
+			str += "<li><a class='page-link' onclick='getCommentPage("+(pageMaker.endPage+1)+");getPageList("+(pageMaker.endPage+1)+")'> Next </a></li>";
 		}
 		$("#pagination").html(str);
 	})
 }
-
-$("li[data-page]").on("click", function(){
-	$("li[data-page]").removeClass("active");
-	$(this).addClass("active");
-});
 
 Handlebars.registerHelper("prettifyDate", function(timeValue){
 	var dateObj = new Date(timeValue);

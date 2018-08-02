@@ -40,8 +40,8 @@ td {
 		<fmt:formatDate var="updatedate" pattern="yyyy-MM-dd KK:mm:ss" value="${boardVO.updatedate}"/>
 		<td>${updatedate}</td>
 		<td>
-			<button type="button" onclick="self.location='admin/edit/'+'${boardVO.mid}'">수정하기</button>
-			<button type="button" onclick="deleteContent('${boardVO.mid}')">삭제하기</button>
+			<button type="button" class="btn" onclick="self.location='admin/edit/'+'${boardVO.mid}'">수정하기</button>
+			<button type="button" class="btn" onclick="deleteContent('${boardVO.mid}')">삭제하기</button>
 		</td>
 	</tr>
 	</c:forEach>

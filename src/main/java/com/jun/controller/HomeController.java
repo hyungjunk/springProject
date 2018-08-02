@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/doA")
+	@RequestMapping("/home")
 	public String doA(Locale locale, Model model) {
-		System.out.println("do A called");
-		model.addAttribute("result", "DOA RESULT");
 		return "doA";
 	}
 	
