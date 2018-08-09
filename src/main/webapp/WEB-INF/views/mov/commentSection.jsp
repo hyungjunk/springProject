@@ -15,7 +15,9 @@ td {
 <form>
 	<div class="form-group row">
 		<input id="cid" type="hidden">
-		<input type="text" id="uid" name="uid" class="form-control-plaintext col-2 text-center" value="${login.uid}" readonly>
+		<input type="text" id="uid" name="uid" class="form-control-plaintext col-2 text-center" 
+		value=<c:if test="${login.uid == Null}"> 'Please Login' </c:if> "${login.uid}" readonly>
+		
 		<input type="text" id="ucomment" name="ucomment" class="form-control col-9">
 		<button type="button" class="btn btn-small col-1 pull-right" onclick="addComment()">Post</button>
 	</div>
@@ -98,10 +100,14 @@ function addComment(){
 			ucomment: ucomment
 		}),
 		success: function(data){
-			alert("성공했습니다");
-			$("#ucomment").val('');
-			getCommentPage(1);
-			getPageList(1);
+			if (data == "SUCCESS") {
+				alert("성공했습니다");
+				$("#ucomment").val("");
+				getCommentPage(1);
+				getPageList(1);
+			} else {
+				alert("실패했습니다.");
+			}
 		},
 		error: function(data){
 			alert("실패했습니다");

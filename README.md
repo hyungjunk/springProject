@@ -4,7 +4,7 @@
 
 Main goal was to copy a website called **Watcha**, the Korean style Netflix.
 
-I referenced a book "ì½”ë“œë¡œ ë°°ìš°ëŠ” ìŠ¤í”„ë§ ì›¹í”„ë¡œì íŠ¸" to build this project.
+I referenced a book "ÄÚµå·Î ¹è¿ì´Â ½ºÇÁ¸µ À¥ÇÁ·ÎÁ§Æ®" to build this project.
 
 #### 1. Video recorded (click the image)
 
@@ -21,3 +21,8 @@ I referenced a book "ì½”ë“œë¡œ ë°°ìš°ëŠ” ìŠ¤í”„ë§ ì›¹í”„ë¡œì íŠ¸" to build thi
 #### 4. Feature 
 
 - to be updated
+
+#### 5. Remaining Job
+
+- main(root) page design
+- file I/O

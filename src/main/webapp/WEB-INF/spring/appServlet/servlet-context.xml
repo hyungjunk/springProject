@@ -44,9 +44,10 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/mov/board*"/>
+			<mapping path="/mov/comment/post"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
+		
 	</interceptors>
 	
 </beans:beans>

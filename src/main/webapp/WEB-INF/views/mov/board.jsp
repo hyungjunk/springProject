@@ -369,6 +369,11 @@ row를 추가하고 6씩 col을 줘서 이미지가 두개씩 슬라이드 되�
 	</div>
 </body>
 <script>
+
+if ("${msg}"=="FAIL"){
+	alert("로그인에 실패했습니다.");
+}
+
 var infoTemplate = $("#movieModal").html();
 var replyTemplate = $("#replyModal").html();
 

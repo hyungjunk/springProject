@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller
-@RequestMapping("/mov/*")
+@RequestMapping("/*")
 public class MovBoardController {
 	
 	@Autowired(required=false)
@@ -27,7 +27,7 @@ public class MovBoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MovBoardController.class);
 	
-	@RequestMapping(value = "board", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String showMovieBoard(
 			Model model
 			, Criteria cri) throws Exception {
@@ -40,14 +40,14 @@ public class MovBoardController {
 		return "/mov/board";
 	}
 	
-	@RequestMapping(value = "board/detail", method = RequestMethod.GET)
+	@RequestMapping(value = "mov/board/detail", method = RequestMethod.GET)
 	public @ResponseBody MovBoardVO showMovieDetail(@ModelAttribute("info") MovBoardVO vo, Model model) throws Exception {
 		vo = (MovBoardVO)service.read(1);
 		System.out.println(vo);
 		return vo; 
 	}
 	
-	@RequestMapping(value = "search", method = RequestMethod.GET)
+	@RequestMapping(value = "mov/search", method = RequestMethod.GET)
 	public String showGenreList(
 			@RequestParam("genre") String genre
 			, SearchCriteria cri

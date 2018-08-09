@@ -34,8 +34,13 @@ public class CommentRestController {
 	@RequestMapping(value="/post", method=RequestMethod.POST)
 	public ResponseEntity<String> addComment(@RequestBody CommentVO vo) throws Exception{
 		ResponseEntity<String> entity = null;
-		service.addComment(vo);
-		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		try {
+			service.addComment(vo);
+			entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.OK);
+		}
 		return entity;
 	}
 	

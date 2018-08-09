@@ -31,10 +31,10 @@ public class UserController {
 		UserVO vo = service.login(dto);
 		if (vo == null) {
 			rttr.addFlashAttribute("msg", "FAIL");
-			return "redirect:/user/login";
+			return "redirect:/";
 		} else {
 			model.addAttribute("userVO", vo);
-			return "/user/loginPost";
+			return "/mov/board";
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class UserController {
 	public String logout(HttpServletRequest req) throws Exception{
 		HttpSession session = req.getSession();
 		session.invalidate();
-		return "redirect:/user/login";
+		return "redirect:/";
 	}
 	
 }

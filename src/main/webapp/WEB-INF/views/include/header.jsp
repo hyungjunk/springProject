@@ -14,7 +14,7 @@
 	<!-- Logo -->
 	<nav class="navbar navbar-fixed-top navbar-dark bg-dark">
 		<div class="navbar-header pull-left">
-			<a class="navbar-brand" href="/mov/board"><h3>CopCha</h3></a> 
+			<a class="navbar-brand" href="/"><h3>CopCha</h3></a> 
 			<c:if test="${login.uid == 'admin'}">
 				<a href="/admin"> Admin </a>
 			</c:if>

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-	@RequestMapping("/home")
+	@RequestMapping("/asd")
 	public String doA(Locale locale, Model model) {
-		return "doA";
+		return "/mov/board";
 	}
 	
 	@RequestMapping("/doA*")
