@@ -20,9 +20,10 @@ I referenced a book "코드로 배우는 스프링 웹프로젝트" to build thi
 
 #### 4. Feature 
 
-- to be updated
+- Login
+- Synchronous/Asynchronous Create, Read, Update, Delete Contents
 
 #### 5. Remaining Job
 
-- main(root) page design
-- file I/O
+- Add transaction that updats view count of content when clicked.
+- File I/O (Currently picture is stored as a form of URL in DataBase)
