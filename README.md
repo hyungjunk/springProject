@@ -8,7 +8,7 @@ I referenced a book "코드로 배우는 스프링 웹프로젝트" to build thi
 
 #### 1. Video recorded
 
-[![Watch the video](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://youtu.be/SzyltXUsS8I)
+[![Watch the video](https://youtu.be/SzyltXUsS8I/1.png)](https://youtu.be/SzyltXUsS8I)
 
 #### 2. Architecture
 
