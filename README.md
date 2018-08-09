@@ -4,7 +4,7 @@
 
 Main goal was to copy a website called **Watcha**, the Korean style Netflix.
 
-I referenced a book "ÄÚµå·Î ¹è¿ì´Â ½ºÇÁ¸µ À¥ÇÁ·ÎÁ§Æ®" to build this project.
+I referenced a book "ì½”ë“œë¡œ ë°°ìš°ëŠ” ìŠ¤í”„ë§ ì›¹í”„ë¡œì íŠ¸" to build this project.
 
 #### 1. Video recorded (click the image)
 
@@ -12,7 +12,7 @@ I referenced a book "ÄÚµå·Î ¹è¿ì´Â ½ºÇÁ¸µ À¥ÇÁ·ÎÁ§Æ®" to build this project.
 
 #### 2. Architecture
 
-- to be updated
+![copchaarchi](https://user-images.githubusercontent.com/25237134/43885176-17b552d0-9bf3-11e8-892e-938252bc5415.PNG)
 
 #### 3. Notable aspect of the project
 
@@ -20,9 +20,10 @@ I referenced a book "ÄÚµå·Î ¹è¿ì´Â ½ºÇÁ¸µ À¥ÇÁ·ÎÁ§Æ®" to build this project.
 
 #### 4. Feature 
 
-- to be updated
+- Login
+- Synchronous/Asynchronous Create, Read, Update, Delete Contents
 
 #### 5. Remaining Job
 
-- main(root) page design
-- file I/O
+- Add transaction that updats view count of content when clicked.
+- File I/O (Currently picture is stored as a form of URL in DataBase)
