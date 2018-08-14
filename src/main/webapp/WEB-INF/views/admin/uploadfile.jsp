@@ -13,6 +13,11 @@
 textarea {
 	white-space : pre;
 }
+iframe {
+	width: 0px;
+	height: 0px;
+	border: 0px;
+}
 </style>
 </head>
 <body>
@@ -22,13 +27,20 @@ textarea {
 </div>
 <hr>
 <div class="form-group">
-<form action="/admin/file/test" method="post" enctype="multipart/form-data">
+<form id="form1" action="/uploadForm" method="post" enctype="multipart/form-data" target="zeroFrame">
 	  <div class="form-row">
 	    <div class="col-3"><input type="text" name="name" class="form-control"></div>
 	    <div class="col"><input type="file" name="file" class="form-control"></div>
 	  </div>
 	<button id="submitBtn" type="submit" class="btn btn-info" >Submit</button>
 </form>
+<iframe name="zeroFrame"></iframe>
+<script>
+function addFilePath(msg){
+	alert(msg);
+	document.getElementById("form1").reset();
+}
+</script>
 </div>
 </div>
 </body>
