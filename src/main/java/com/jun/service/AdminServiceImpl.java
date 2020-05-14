@@ -23,7 +23,7 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public void create(MovBoardVO movboardVO) throws Exception {
-		dao.create(movboardVO);
+		dao.create(movboardVO); // ..? where is connection closing?
 	}
 	
 	@Override
